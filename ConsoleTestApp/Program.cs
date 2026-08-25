@@ -7,25 +7,11 @@ namespace ConsoleTestApp
     {
         static void Main(string[] args)
         {
-            /* Left turn
-            double lat1 = 43.9248223;
-            double lon1 = 7.0099617;
-            Node A = new Node(43.9248223, 7.0099617);
-
-            Right turn
-            double lat2 = 43.9249598;
-            double lon2 = 7.0096884;
-
-            Straight
-            double lat3 = 43.9251878;
-            double lon3 = 7.0092593;
-            */
-
             List<Node> nodes = new List<Node>
             {
-                new Node(43.9248223, 7.0099617),
-                new Node(43.9249598, 7.0096884),
-                new Node(43.9251878, 7.0092593),
+                new Node(43.9248223, 7.0099617), //Left turn
+                new Node(43.9249598, 7.0096884), //Right turn
+                new Node(43.9251878, 7.0092593), //Straight
             };
 
 
