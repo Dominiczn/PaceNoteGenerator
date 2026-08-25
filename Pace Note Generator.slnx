@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ConsoleTestApp/ConsoleTestApp.csproj" />
+  <Project Path="Pace Note Generator/Pace Note Generator.csproj" />
+</Solution>
