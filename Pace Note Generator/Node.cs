@@ -15,9 +15,9 @@ namespace Pace_Note_Generator
             longitude = lon;
         }
 
-        public double DistanceTo(double lat, double lon)
+        public double DistanceTo(Node node)
         {
-            return Geomath.GetDistance(latitude, longitude, lat, lon);
+            return Geomath.GetDistance(this, node);
         }
     }
 }

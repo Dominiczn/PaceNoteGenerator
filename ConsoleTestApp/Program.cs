@@ -7,18 +7,19 @@ namespace ConsoleTestApp
     {
         static void Main(string[] args)
         {
-            //A
+            /* Left turn
             double lat1 = 43.9248223;
             double lon1 = 7.0099617;
             Node A = new Node(43.9248223, 7.0099617);
 
-            //B
+            Right turn
             double lat2 = 43.9249598;
             double lon2 = 7.0096884;
 
-            //C
+            Straight
             double lat3 = 43.9251878;
             double lon3 = 7.0092593;
+            */
 
             List<Node> nodes = new List<Node>
             {
@@ -29,17 +30,17 @@ namespace ConsoleTestApp
 
 
 
-            double distanceAB = Geomath.GetDistance(lat1, lon1, lat2, lon2);
-            double distanceBC = Geomath.GetDistance(lat2, lon2, lat3, lon3);
-            double distanceAC = Geomath.GetDistance(lat1, lon1, lat3, lon3);
+            double distanceAB = Geomath.GetDistance(nodes[0], nodes[1]);
+            double distanceBC = Geomath.GetDistance(nodes[1], nodes[2]);
+            double distanceAC = Geomath.GetDistance(nodes[0], nodes[2]);
 
             Console.WriteLine($"a: {distanceAB}\nb: {distanceBC}\nc: {distanceAC}\n");
 
             Console.WriteLine(Geomath.CircumcircleRadius(distanceAB, distanceBC, distanceAC));
 
-            double crossProduct = Geomath.CalculateTurnAngle(lat1, lon1, lat2, lon2, lat3, lon3);
-            Console.WriteLine(Geomath.ConvertToEquirectangular(lat1, lon1, lat2, lon2));
-            Console.WriteLine(Geomath.ConvertToEquirectangular(lat2, lon2, lat3, lon3));
+            double crossProduct = Geomath.CalculateTurnAngle(nodes[0], nodes[1], nodes[2]);
+            Console.WriteLine(Geomath.ConvertToEquirectangular(nodes[0], nodes[1]));
+            Console.WriteLine(Geomath.ConvertToEquirectangular(nodes[1], nodes[2]));
             Console.WriteLine(crossProduct);
         }
     }

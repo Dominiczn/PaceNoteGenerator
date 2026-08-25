@@ -7,14 +7,14 @@ namespace Pace_Note_Generator
     public static class Geomath
     {
         //converts the coordinates of point2 from EPSG:4326 as used by OSRM EPSG:4087 (Equirectangular Projection) to be used for maths. the coordinates of point1 are set a 0,0, and point2 is relative to point1
-        public static (double, double) ConvertToEquirectangular(double lat1, double lon1, double lat2, double lon2)
+        public static (double, double) ConvertToEquirectangular(Node node1, Node node2)
         {
             const int R = 6371009; //R is the mean radius of Earth in metres (WGS 84)
 
             //finds difference in latitude, longitude, and finds average latitude
-            double deltaLat = ToRadians(lat1 - lat2);
-            double deltaLon = ToRadians(lon1 - lon2);
-            double avgLat = ToRadians((lat1 + lat2)/2);
+            double deltaLat = ToRadians(node1.latitude - node2.latitude);
+            double deltaLon = ToRadians(node1.longitude - node2.longitude);
+            double avgLat = ToRadians((node1.latitude + node2.latitude)/2);
 
             //converts the EPSG:4326 coordinates to EPSG4087 with cosine approximation
             double x = R * deltaLon * Math.Cos(avgLat);
@@ -36,9 +36,9 @@ namespace Pace_Note_Generator
 
 
         //helper method so getting distance is only 1 method
-        public static double GetDistance(double lat1, double lon1, double lat2, double lon2)
+        public static double GetDistance(Node node1, Node node2)
         {
-            (double x, double y) = Geomath.ConvertToEquirectangular(lat1, lon1, lat2, lon2);
+            (double x, double y) = Geomath.ConvertToEquirectangular(node1, node2);
             return Geomath.Pythagoras(x, y);
         }
 
@@ -49,10 +49,10 @@ namespace Pace_Note_Generator
         }
 
         //calculates the 2D cross product of the 3 nodes to figure out where a corner is and which way it turns
-        public static double CalculateTurnAngle(double lat1, double lon1, double lat2, double lon2, double lat3, double lon3)
+        public static double CalculateTurnAngle(Node node1, Node node2, Node node3)
         {
-            (double ABx, double ABy) = Geomath.ConvertToEquirectangular(lat1, lon1, lat2, lon2);
-            (double BCx, double BCy) = Geomath.ConvertToEquirectangular(lat2, lon2, lat3, lon3);
+            (double ABx, double ABy) = Geomath.ConvertToEquirectangular(node1, node2);
+            (double BCx, double BCy) = Geomath.ConvertToEquirectangular(node2, node3);
 
             //finds the heading angle of each vector using arctan2
             double angleAB = Math.Atan2(ABy, ABx);
