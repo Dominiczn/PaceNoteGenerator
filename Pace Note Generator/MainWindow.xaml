@@ -10,6 +10,7 @@
         WindowState="Maximized"
         Background="#141414">
 
+    <!--These are so I remove the blue highlight when you over over a button, and instead lower the opacity of the button on hover-->
     <Window.Resources>
         <Style x:Key="NoBlueButton" TargetType="Button">
             <Style.Triggers>
@@ -52,6 +53,7 @@
                     <RowDefinition Height="10*"/>
                 </Grid.RowDefinitions>
 
+                <!--Title-->
                 <TextBlock Grid.Row="0" 
                            Text="Pace Note Generator" 
                            TextAlignment="Center"
@@ -60,7 +62,8 @@
                            FontFamily="Bahnschrift"
                            FontWeight="Bold"
                            FontSize="45"/>
-
+                
+                <!--New Stage Button-->
                 <Border Grid.Row="1" CornerRadius="20" Background="#E2001A" Width ="150" Margin="5" Style="{StaticResource LowerPillOpacity}">
                     <Button Content="New Stage" 
                             Height="50" Width="150" 
@@ -71,6 +74,7 @@
                             Style="{StaticResource NoBlueButton}"/>
                 </Border>
 
+                <!--Open Stage Button-->
                 <Border Grid.Row="2" CornerRadius="20" BorderThickness="1" BorderBrush="#FEFBFB" Background="#141414" Width ="150" Margin="5" Style="{StaticResource LowerPillOpacity}">
                     <Button Content="Open Stage" 
                             Height="50" Width="150" 
@@ -81,6 +85,7 @@
                             Style="{StaticResource NoBlueButton}"/>
                 </Border>
 
+                <!--Exit Button-->
                 <Button Grid.Row="3" 
                         Content="Exit"
                         Width ="30"
