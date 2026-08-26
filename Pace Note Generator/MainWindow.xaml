@@ -5,8 +5,90 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pace_Note_Generator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Pace Note Generator" 
+        Height="450" Width="800"
+        WindowState="Maximized"
+        Background="#141414">
 
+    <Window.Resources>
+        <Style x:Key="NoBlueButton" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.8"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LowerPillOpacity" TargetType="Border">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Image Source="/Transparent Background.png" Opacity="0.3" Stretch="UniformToFill"/>
+
+        <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           Text="Pace Note Generator" 
+                           TextAlignment="Center"
+                           Margin="10"
+                           Foreground="#FEFBFB"
+                           FontFamily="Bahnschrift"
+                           FontWeight="Bold"
+                           FontSize="45"/>
+
+                <Border Grid.Row="1" CornerRadius="20" Background="#E2001A" Width ="150" Margin="5" Style="{StaticResource LowerPillOpacity}">
+                    <Button Content="New Stage" 
+                            Height="50" Width="150" 
+                            Background="Transparent" 
+                            BorderBrush="Transparent" 
+                            FontFamily="Segoe UI"
+                            FontSize="15"
+                            Style="{StaticResource NoBlueButton}"/>
+                </Border>
+
+                <Border Grid.Row="2" CornerRadius="20" BorderThickness="1" BorderBrush="#FEFBFB" Background="#141414" Width ="150" Margin="5" Style="{StaticResource LowerPillOpacity}">
+                    <Button Content="Open Stage" 
+                            Height="50" Width="150" 
+                            Background="Transparent"
+                            BorderBrush="Transparent" 
+                            FontFamily="Segoe UI"
+                            FontSize="15"
+                            Style="{StaticResource NoBlueButton}"/>
+                </Border>
+
+                <Button Grid.Row="3" 
+                        Content="Exit"
+                        Width ="30"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontFamily="Segoe UI"
+                        Style="{StaticResource NoBlueButton}"/>
+            </Grid>
+        </Viewbox>
     </Grid>
 </Window>

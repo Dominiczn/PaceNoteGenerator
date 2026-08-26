@@ -9,4 +9,16 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Transparent Background.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ObjectModel" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Transparent Background.png" />
+  </ItemGroup>
+
 </Project>

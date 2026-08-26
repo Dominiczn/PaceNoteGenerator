@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pace_Note_Generator
+namespace Pace_Note_Generator.Backend
 {
     public static class Geomath
     {

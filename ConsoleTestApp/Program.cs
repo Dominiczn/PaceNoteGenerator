@@ -1,5 +1,5 @@
 ﻿using System;
-using Pace_Note_Generator;
+using Pace_Note_Generator.Backend;
 
 namespace ConsoleTestApp
 {
