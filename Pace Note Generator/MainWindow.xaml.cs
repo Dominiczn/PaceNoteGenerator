@@ -12,5 +12,10 @@ namespace Pace_Note_Generator
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

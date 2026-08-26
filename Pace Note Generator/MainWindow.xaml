@@ -86,13 +86,15 @@
                 </Border>
 
                 <!--Exit Button-->
-                <Button Grid.Row="3" 
+                <Button Name="BtnExit"
+                        Grid.Row="3"
                         Content="Exit"
                         Width ="30"
                         Background="Transparent"
                         BorderThickness="0"
                         FontFamily="Segoe UI"
-                        Style="{StaticResource NoBlueButton}"/>
+                        Style="{StaticResource NoBlueButton}"
+                        Click="BtnExit_Click"/>
             </Grid>
         </Viewbox>
     </Grid>
