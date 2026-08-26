@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Frontend\Transparent Background.png" />
     <None Remove="Transparent Background.png" />
   </ItemGroup>
 
@@ -18,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Transparent Background.png" />
+    <Resource Include="Frontend\Transparent Background.png" />
   </ItemGroup>
 
 </Project>

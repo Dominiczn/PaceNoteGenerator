@@ -6,13 +6,13 @@ namespace Pace_Note_Generator.Backend
 {
     public class Node
     {
-        public double latitude { protected set; get; }
-        public double longitude { protected set; get; }
+        public double Latitude { protected set; get; }
+        public double Longitude { protected set; get; }
 
         public Node(double lat, double lon)
         {
-            latitude = lat;
-            longitude = lon;
+            Latitude = lat;
+            Longitude = lon;
         }
 
         public double DistanceTo(Node node)

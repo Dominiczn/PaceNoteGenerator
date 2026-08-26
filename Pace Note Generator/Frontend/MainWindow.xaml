@@ -42,7 +42,7 @@
     </Window.Resources>
 
     <Grid>
-        <Image Source="/Transparent Background.png" Opacity="0.3" Stretch="UniformToFill"/>
+        <Image Source="/Frontend/Transparent Background.png" Opacity="0.3" Stretch="UniformToFill"/>
 
         <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="10">
             <Grid>
