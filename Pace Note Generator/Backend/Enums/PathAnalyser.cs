@@ -15,6 +15,7 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
             NodeList = nodeList;
         }
 
+        //Groups nodes on a route into left corners, right corners, and straights
         public List<Node> GroupCorners()
         {
             List<Node> group = new List<Node>();
@@ -36,9 +37,33 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
             return group;
         }
 
-        //public List<Pacenote> 
+        //decides what pacenote to give each group of nodes grouped by corner
+        public Pacenote ClassifyCorner(List<Node> corner)
+        {
+            Pacenote pacenote = new Pacenote();
+            if (corner.Count > 3)
+            {
+                double highestAngle = 0;
+                for (int i = 0; i < corner.Count; i++)
+                {
+                    double currentTurnAngle = Geomath.CalculateTurnAngle(corner[0], corner[1], corner[2]);
+                    if (currentTurnAngle > highestAngle) { highestAngle = currentTurnAngle; }
+                }
+
+
+                pacenote.cornerSeverity = Geomath.CalculateCornerSeverity(highestAngle);
+            }
+
+            else
+            {
+                pacenote.isStraight = true;
+            }
+
+            return pacenote;
+        }
 
         
+        //calculates the length of a straight by adding up the individual distances between all nodes in the straight
         public double CalculateStraightLength(List<Node> straightNodes)
         {
             double distance = 0;

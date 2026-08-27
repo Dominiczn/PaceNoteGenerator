@@ -60,6 +60,43 @@ namespace Pace_Note_Generator.Backend
             else { return null; }
         }
 
+        public static CornerSeverity? CalculateCornerSeverity(double cornerAngle)
+        {
+            CornerSeverity? severity = null;
+            switch(cornerAngle)
+            {
+                case var n when n > CornerThresholds.Straight && n <= CornerThresholds.Six:
+                    severity = CornerSeverity.Six;
+                    break;
+
+                case var n when n > CornerThresholds.Six && n <= CornerThresholds.Five:
+                    severity = CornerSeverity.Five;
+                    break;
+
+                case var n when n > CornerThresholds.Five && n <= CornerThresholds.Four:
+                    severity = CornerSeverity.Four;
+                    break;
+
+                case var n when n > CornerThresholds.Four && n <= CornerThresholds.Three:
+                    severity = CornerSeverity.Three;
+                    break;
+
+                case var n when n > CornerThresholds.Three && n <= CornerThresholds.Square:
+                    severity = CornerSeverity.Square;
+                    break;
+
+                case var n when n > CornerThresholds.Square && n <= CornerThresholds.Two:
+                    severity = CornerSeverity.Two;
+                    break;
+
+                case var n when n > CornerThresholds.Two && n <= CornerThresholds.One:
+                    severity = CornerSeverity.One;
+                    break;
+            }
+
+            return severity;
+        }
+
         //calculates the 2D cross product of the 3 nodes to figure out where a corner is and which way it turns
         public static double CalculateTurnAngle(Node node1, Node node2, Node node3)
         {

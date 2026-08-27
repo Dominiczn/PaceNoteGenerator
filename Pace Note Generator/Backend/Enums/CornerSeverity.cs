@@ -6,10 +6,10 @@ namespace Pace_Note_Generator.Backend
 {
     public enum CornerSeverity
     {
-        HP,
+        Hairpin,
         One,
         Two,
-        SQ,
+        Square,
         Three,
         Four,
         Five,
