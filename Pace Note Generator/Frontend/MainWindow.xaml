@@ -10,7 +10,7 @@
         WindowState="Maximized"
         Background="#141414">
 
-    <!--This removes the blue border on mouse hover-->
+    <!--This removes the blue border on mouse hover and lowers text opacity-->
     <Window.Resources>
         <Style x:Key="NoBlueButton" TargetType="Button">
             <Style.Triggers>
