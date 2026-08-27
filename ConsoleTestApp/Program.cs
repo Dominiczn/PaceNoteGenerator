@@ -22,7 +22,7 @@ namespace ConsoleTestApp
 
             Console.WriteLine($"a: {distanceAB}\nb: {distanceBC}\nc: {distanceAC}\n");
 
-            Console.WriteLine(Geomath.CircumcircleRadius(distanceAB, distanceBC, distanceAC));
+            //Console.WriteLine(Geomath.CircumcircleRadius(distanceAB, distanceBC, distanceAC));
 
             double crossProduct = Geomath.CalculateTurnAngle(nodes[0], nodes[1], nodes[2]);
             Console.WriteLine(Geomath.ConvertToEquirectangular(nodes[0], nodes[1]));

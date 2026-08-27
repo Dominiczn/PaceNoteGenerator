@@ -26,4 +26,10 @@
     <Resource Include="Frontend\Transparent Background.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Backend\Analysis\" />
+    <Folder Include="Backend\API\" />
+    <Folder Include="Backend\Services\" />
+  </ItemGroup>
+
 </Project>

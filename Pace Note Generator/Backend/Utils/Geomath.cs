@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pace_Note_Generator.Backend.Utils;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -43,9 +44,22 @@ namespace Pace_Note_Generator.Backend
         }
 
         //calculates the radius of the circumcircle using the distances between points a, b, and c 
-        public static double CircumcircleRadius(double a, double b, double c)
+        public static double CircumcircleRadius(Node node1, Node node2, Node node3)
         {
-            return (a * b * c) / (Math.Sqrt((a + b + c) * (b + c - a) * (c + a - b) * (a + b - c)));
+            double sideA = GetDistance(node1, node2);
+            double sideB = GetDistance(node2, node3);
+            double sideC = GetDistance(node1, node3);
+            return (sideA * sideB * sideC) / (Math.Sqrt((sideA + sideB + sideC) * (sideB + sideC - sideA) * (sideC + sideA - sideB) * (sideA + sideB - sideC)));
+        }
+
+        //helper method so calculating the direction of a corner (3 nodes at a time) direction is only 1 method
+        public static Direction? CalculateNodesDirection(Node node1, Node node2, Node node3)
+        {
+            double radius = Geomath.CircumcircleRadius(node1, node2, node3);
+
+            if (radius > DirectionThresholds.StraightThreshold) { return Direction.Left; }
+            else if (radius < -(DirectionThresholds.StraightThreshold)) { return Direction.Right; }
+            else { return null; }
         }
 
         //calculates the 2D cross product of the 3 nodes to figure out where a corner is and which way it turns
