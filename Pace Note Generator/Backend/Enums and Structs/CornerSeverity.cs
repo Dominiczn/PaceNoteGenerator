@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Pace_Note_Generator.Backend
 {
-    internal enum CornerSeverity
+    public enum CornerSeverity
     {
         HP,
         One,

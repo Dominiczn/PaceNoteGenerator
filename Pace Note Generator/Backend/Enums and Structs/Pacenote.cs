@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Pace_Note_Generator.Backend
 {
-    internal struct Pacenote
+    public struct Pacenote
     {
         public Direction? direction;
         public CornerSeverity? cornerSeverity;

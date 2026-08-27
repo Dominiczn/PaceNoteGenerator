@@ -12,9 +12,9 @@ namespace Pace_Note_Generator.Backend
             const int R = 6371009; //R is the mean radius of Earth in metres (WGS 84)
 
             //finds difference in latitude, longitude, and finds average latitude
-            double deltaLat = ToRadians(node1.latitude - node2.latitude);
-            double deltaLon = ToRadians(node1.longitude - node2.longitude);
-            double avgLat = ToRadians((node1.latitude + node2.latitude)/2);
+            double deltaLat = ToRadians(node1.Latitude - node2.Latitude);
+            double deltaLon = ToRadians(node1.Longitude - node2.Longitude);
+            double avgLat = ToRadians((node1.Latitude + node2.Latitude)/2);
 
             //converts the EPSG:4326 coordinates to EPSG4087 with cosine approximation
             double x = R * deltaLon * Math.Cos(avgLat);
