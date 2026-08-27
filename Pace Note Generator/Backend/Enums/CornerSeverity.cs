@@ -14,6 +14,7 @@ namespace Pace_Note_Generator.Backend
         Four,
         Five,
         Six,
+        Straight,
 
     }
 }

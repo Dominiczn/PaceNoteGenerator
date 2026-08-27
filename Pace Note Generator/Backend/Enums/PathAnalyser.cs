@@ -41,17 +41,19 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
         public Pacenote ClassifyCorner(List<Node> corner)
         {
             Pacenote pacenote = new Pacenote();
-            if (corner.Count > 3)
+            if (corner.Count >= 3)
             {
                 double highestAngle = 0;
-                for (int i = 0; i < corner.Count; i++)
+                for (int i = 1; i < corner.Count - 1; i++)
                 {
-                    double currentTurnAngle = Geomath.CalculateTurnAngle(corner[0], corner[1], corner[2]);
-                    if (currentTurnAngle > highestAngle) { highestAngle = currentTurnAngle; }
+                    double currentTurnAngle = Geomath.CalculateTurnAngle(corner[i - 1], corner[i], corner[i + 1]);
+
+                    if (Math.Abs(currentTurnAngle) > Math.Abs(highestAngle)) { highestAngle = currentTurnAngle; }
                 }
 
 
                 pacenote.cornerSeverity = Geomath.CalculateCornerSeverity(highestAngle);
+                if (Math.Abs(highestAngle) <= CornerThresholds.Straight) { pacenote.isStraight = true; }
             }
 
             else
