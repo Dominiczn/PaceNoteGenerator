@@ -19,13 +19,14 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
         {
             List<Node> group = new List<Node>();
             Direction? nodesGroupDirection = Geomath.CalculateNodesDirection(NodeList[0], NodeList[1], NodeList[2]);
-            //group.Add(NodeList[0]);
+            NodeList[0].Direction = nodesGroupDirection;
+            group.Add(NodeList[0]);
 
-            for (int i = 0; i < NodeList.Count; i++)
+            for (int i = 1; i < NodeList.Count; i++)
             {
-                if (i < NodeList.Count - 2)
+                if (i < NodeList.Count - 1)
                 {
-                    Direction? nodesDirection = Geomath.CalculateNodesDirection(NodeList[i], NodeList[i + 1], NodeList[i + 2]);
+                    Direction? nodesDirection = Geomath.CalculateNodesDirection(NodeList[i - 1], NodeList[i], NodeList[i + 1]);
                     if (nodesDirection == nodesGroupDirection) {group.Add(NodeList[i]);}
                     else { break; }
                     NodeList[i].Direction = nodesDirection; 
