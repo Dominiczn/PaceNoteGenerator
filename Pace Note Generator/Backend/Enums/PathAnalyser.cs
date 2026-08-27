@@ -15,7 +15,7 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
             NodeList = nodeList;
         }
 
-        public List<Node> CornerGrouping()
+        public List<Node> GroupCorners()
         {
             List<Node> group = new List<Node>();
             Direction? nodesGroupDirection = Geomath.CalculateNodesDirection(NodeList[0], NodeList[1], NodeList[2]);
@@ -35,5 +35,18 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
 
             return group;
         }
+
+        
+        public double CalculateStraightLength(List<Node> straightNodes)
+        {
+            double distance = 0;
+            for (int i = 1; i < straightNodes.Count; i++)
+            {
+                distance += Geomath.GetDistance(straightNodes[i - 1], straightNodes[i]);
+            }
+
+            return distance;
+        }
+        
     }
 }

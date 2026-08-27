@@ -11,16 +11,34 @@ namespace ConsoleTestApp
         {
             List<Node> nodes = new List<Node>
             {
-                new Node(43.907215, 6.985005),
-                new Node(43.907216, 6.985155),
-                new Node(43.907175, 6.985291),
-                new Node(43.907052, 6.985313),
-                new Node(43.906907, 6.985336),
-                new Node(43.906821, 6.985456),
-                new Node(43.906804, 6.985591),
-                new Node(43.906758, 6.985717),
-                new Node(43.906625, 6.985745),
-                new Node(43.906272, 6.985352),
+                new Node(52.36989, -0.456244),
+                new Node(52.369446, -0.455545),
+                new Node(52.368894, -0.454589),
+                new Node(52.368238, -0.453255),
+                new Node(52.367845, -0.452408),
+                new Node(52.367226, -0.450815),
+                new Node(52.366699, -0.44908),
+                new Node(52.366274, -0.447346),
+                new Node(52.365964, -0.445955),
+                new Node(52.365779, -0.444743),
+                new Node(52.365006, -0.438839),
+                new Node(52.364631, -0.43576),
+                new Node(52.364154, -0.431907),
+                new Node(52.363961, -0.430364),
+                new Node(52.363903, -0.429928),
+                new Node(52.363111, -0.424017),
+                new Node(52.363029, -0.423312),
+                new Node(52.362844, -0.42186),
+                new Node(52.362712, -0.42086),
+                new Node(52.36253, -0.419345),
+                new Node(52.36232, -0.417614),
+                new Node(52.361732, -0.413103),
+                new Node(52.361623, -0.412232),
+                new Node(52.361401, -0.411149),
+                new Node(52.36124, -0.410425),
+                new Node(52.360989, -0.409441),
+                new Node(52.360846, -0.40896),
+                new Node(52.360718, -0.4086),
             };
 
             /*
@@ -28,9 +46,10 @@ namespace ConsoleTestApp
             Console.WriteLine(angle);
             */
 
-            
+
             PathAnalyser testPath = new PathAnalyser(nodes);
             {
+                /*
                 List<List<Node>> allGroups = new List<List<Node>>();
                 List<Node> usedNodes = new List<Node>();
 
@@ -38,7 +57,7 @@ namespace ConsoleTestApp
                 {
                     if (nodes.Count > 3)
                     {
-                        List<Node> group = testPath.CornerGrouping();
+                        List<Node> group = testPath.GroupCorners();
                         allGroups.Add(group);
                         foreach (var node in group)
                         {
@@ -49,9 +68,9 @@ namespace ConsoleTestApp
 
                     else { break; }
                 }
+                */
 
-                Console.WriteLine(allGroups);
-                int sdf = 0;
+                Console.WriteLine(testPath.CalculateStraightLength(nodes));
             }
             
             
