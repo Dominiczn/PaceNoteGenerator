@@ -6,7 +6,7 @@ namespace Pace_Note_Generator.Backend
 {
     public static class Geomath
     {
-        //converts the coordinates of point2 from EPSG:4326 as used by OSRM EPSG:4087 (Equirectangular Projection) to be used for maths. the coordinates of point1 are set a 0,0, and point2 is relative to point1
+        //converts node1's coordinates to local equirectangular approximation in meters relative to node2
         public static (double, double) ConvertToEquirectangular(Node node1, Node node2)
         {
             const int R = 6371009; //R is the mean radius of Earth in metres (WGS 84)
@@ -16,7 +16,7 @@ namespace Pace_Note_Generator.Backend
             double deltaLon = ToRadians(node1.Longitude - node2.Longitude);
             double avgLat = ToRadians((node1.Latitude + node2.Latitude)/2);
 
-            //converts the EPSG:4326 coordinates to EPSG4087 with cosine approximation
+            //converts the above deltas into a local equirectangular approximation
             double x = R * deltaLon * Math.Cos(avgLat);
             double y = R * deltaLat;
 
@@ -51,12 +51,12 @@ namespace Pace_Note_Generator.Backend
         //calculates the 2D cross product of the 3 nodes to figure out where a corner is and which way it turns
         public static double CalculateTurnAngle(Node node1, Node node2, Node node3)
         {
-            (double ABx, double ABy) = Geomath.ConvertToEquirectangular(node1, node2);
-            (double BCx, double BCy) = Geomath.ConvertToEquirectangular(node2, node3);
+            (double BAx, double ABy) = Geomath.ConvertToEquirectangular(node1, node2);
+            (double CBx, double BCy) = Geomath.ConvertToEquirectangular(node2, node3);
 
             //finds the heading angle of each vector using arctan2
-            double angleAB = Math.Atan2(ABy, ABx);
-            double angleBC = Math.Atan2(BCy, BCx);
+            double angleAB = Math.Atan2(ABy, BAx);
+            double angleBC = Math.Atan2(BCy, CBx);
 
             //calculates the difference between the two angles
             double angleDiff = angleBC - angleAB;

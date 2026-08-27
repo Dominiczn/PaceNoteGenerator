@@ -9,8 +9,7 @@ namespace Pace_Note_Generator
         {
             InitializeComponent();
         }
-
-
+        
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)

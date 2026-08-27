@@ -15,7 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ObjectModel" Version="4.3.0" />
+    <Page Remove="Frontend\App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="Frontend\App.xaml" />
   </ItemGroup>
 
   <ItemGroup>
