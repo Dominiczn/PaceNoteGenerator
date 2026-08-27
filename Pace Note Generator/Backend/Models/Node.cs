@@ -8,6 +8,7 @@ namespace Pace_Note_Generator.Backend
     {
         public double Latitude { protected set; get; }
         public double Longitude { protected set; get; }
+        public Direction? Direction;
 
         public Node(double lat, double lon)
         {
@@ -18,6 +19,11 @@ namespace Pace_Note_Generator.Backend
         public double DistanceTo(Node node)
         {
             return Geomath.GetDistance(this, node);
+        }
+
+        public override string ToString()
+        {
+            return $"{Latitude}, {Longitude}";
         }
     }
 }

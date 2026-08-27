@@ -55,7 +55,7 @@ namespace Pace_Note_Generator.Backend
         //helper method so calculating the direction of a corner (3 nodes at a time) direction is only 1 method
         public static Direction? CalculateNodesDirection(Node node1, Node node2, Node node3)
         {
-            double radius = Geomath.CircumcircleRadius(node1, node2, node3);
+            double radius = Geomath.CalculateTurnAngle(node1, node2, node3);
 
             if (radius > DirectionThresholds.StraightThreshold) { return Direction.Left; }
             else if (radius < -(DirectionThresholds.StraightThreshold)) { return Direction.Right; }
