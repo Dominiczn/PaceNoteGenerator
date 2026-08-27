@@ -36,6 +36,8 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
             return group;
         }
 
+        //public List<Pacenote> 
+
         
         public double CalculateStraightLength(List<Node> straightNodes)
         {

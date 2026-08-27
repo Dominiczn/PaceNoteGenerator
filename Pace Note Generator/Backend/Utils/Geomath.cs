@@ -12,12 +12,10 @@ namespace Pace_Note_Generator.Backend
         {
             const int R = 6371009; //R is the mean radius of Earth in metres (WGS 84)
 
-            //finds difference in latitude, longitude, and finds average latitude
             double deltaLat = ToRadians(node1.Latitude - node2.Latitude);
             double deltaLon = ToRadians(node1.Longitude - node2.Longitude);
             double avgLat = ToRadians((node1.Latitude + node2.Latitude)/2);
 
-            //converts the above deltas into a local equirectangular approximation
             double x = R * deltaLon * Math.Cos(avgLat);
             double y = R * deltaLat;
 
@@ -57,8 +55,8 @@ namespace Pace_Note_Generator.Backend
         {
             double radius = Geomath.CalculateTurnAngle(node1, node2, node3);
 
-            if (radius > DirectionThresholds.StraightThreshold) { return Direction.Left; }
-            else if (radius < -(DirectionThresholds.StraightThreshold)) { return Direction.Right; }
+            if (radius > CornerThresholds.Straight) { return Direction.Left; }
+            else if (radius < -(CornerThresholds.Straight)) { return Direction.Right; }
             else { return null; }
         }
 
@@ -68,18 +66,14 @@ namespace Pace_Note_Generator.Backend
             (double BAx, double ABy) = Geomath.ConvertToEquirectangular(node1, node2);
             (double CBx, double BCy) = Geomath.ConvertToEquirectangular(node2, node3);
 
-            //finds the heading angle of each vector using arctan2
             double angleAB = Math.Atan2(ABy, BAx);
             double angleBC = Math.Atan2(BCy, CBx);
 
-            //calculates the difference between the two angles
             double angleDiff = angleBC - angleAB;
 
-            //normalises the angle to keep it between -PI and PI (-180° to 180°)
             if (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
             if (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
 
-            //converts radians to degrees for easy reading
             return angleDiff * (180.0 / Math.PI);
 
         }
