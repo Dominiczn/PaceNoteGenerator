@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Pace_Note_Generator.Backend.Enums_and_Structs
+namespace Pace_Note_Generator.Backend.Analysis
 {
     public class PathAnalyser
     {
@@ -19,10 +19,9 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
         public List<Pacenote> AnalysePath()
         {
             List<Pacenote> pacenotes = new List<Pacenote>();
-            List<List<Node>> allGroups = new List<List<Node>>();
-            GroupCorners(allGroups);
+            List<List<Node>> allGroups = GroupCorners();
 
-            foreach(List<Node> nodes in allGroups)
+            foreach (List<Node> nodes in allGroups)
             {
                 Pacenote pacenote = ClassifyCorner(nodes, allGroups);
                 if (pacenote.IsStraight)
@@ -36,9 +35,16 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
             return pacenotes;
         }
 
+        public List<List<Node>> GroupCorners()
+        {
+            List<List<Node>> allGroups = new List<List<Node>>();
+            GroupCornersRecursive(allGroups);
+            return allGroups;
+        }
+
         //Groups nodes on a route into left corners, right corners, and straights
         //TODO: last few nodes get cut off if number of nodes in list isnt multiple of 3. FIX IT
-        public void GroupCorners(List<List<Node>> allGroups)
+        public void GroupCornersRecursive(List<List<Node>> allGroups)
         {
             if (NodeList.Count <= 3) { return; }
 
@@ -62,21 +68,22 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
             allGroups.Add(group);
             NodeList.RemoveRange(0, group.Count);
 
-            GroupCorners(allGroups);
+            GroupCornersRecursive(allGroups);
         }
 
         //Helper method that joins direction and severity classification into 1
         private Pacenote ClassifyCorner(List<Node> corner, List<List<Node>> allCorners)
         {
             if (corner.Count < 3 && corner[0].Direction != null) { corner = AddPreviousNodeToCorner(corner, allCorners); }
-            Pacenote pacenote = ClassifyCornerSeverity(corner);
+            Pacenote pacenote = CalculateCornerSeverity(corner);
             pacenote.Direction = ClassifyCornerDirection(corner);
 
             return pacenote;
         }
 
         //decides what pacenote to give each group of nodes grouped by corner
-        private Pacenote ClassifyCornerSeverity(List<Node> corner)
+        //TODO: This needs to be changed to circumcircle radius rather than using the turn angle
+        private Pacenote CalculateCornerSeverity(List<Node> corner)
         {
             Pacenote pacenote = new Pacenote();
             double highestAngle = 0;
@@ -87,12 +94,13 @@ namespace Pace_Note_Generator.Backend.Enums_and_Structs
                 if (Math.Abs(currentTurnAngle) > Math.Abs(highestAngle)) { highestAngle = currentTurnAngle; }
             }
 
-            pacenote.CornerSeverity = Geomath.CalculateCornerSeverity(highestAngle);
+            pacenote.CornerSeverity = Geomath.ClassifyCornerSeverity(highestAngle);
             if (Math.Abs(highestAngle) <= CornerThresholds.Straight) { pacenote.IsStraight = true; }
 
             return pacenote;
         }
 
+        //adds the last node of the previous group to the start of the current one
         private List<Node> AddPreviousNodeToCorner(List<Node> corner, List<List<Node>> allCorners)
         {
             int cornerIndexInAllCorners = 0;
