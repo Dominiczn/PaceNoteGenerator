@@ -65,39 +65,39 @@ namespace Pace_Note_Generator.Backend
             CornerSeverity? severity = null;
             switch(cornerAngle)
             {
-                case var n when n <= CornerThresholds.Straight && n >= -CornerThresholds.Straight:
+                case var n when Math.Abs(n) <= CornerThresholds.Straight:
                     severity = CornerSeverity.Straight;
                     break;
 
-                case var n when (n > CornerThresholds.Straight && n <= CornerThresholds.Six) || (n < -CornerThresholds.Straight && n >= -CornerThresholds.Six):
+                case var n when Math.Abs(n) > CornerThresholds.Straight && Math.Abs(n) <= CornerThresholds.Six:
                     severity = CornerSeverity.Six;
                     break;
 
-                case var n when (n > CornerThresholds.Six && n <= CornerThresholds.Five) || (n < -CornerThresholds.Six && n >= -CornerThresholds.Five):
+                case var n when Math.Abs(n) > CornerThresholds.Six && Math.Abs(n) <= CornerThresholds.Five:
                     severity = CornerSeverity.Five;
                     break;
 
-                case var n when (n > CornerThresholds.Five && n <= CornerThresholds.Four) || (n < -CornerThresholds.Five && n >= -CornerThresholds.Four):
+                case var n when Math.Abs(n) > CornerThresholds.Five && Math.Abs(n) <= CornerThresholds.Four:
                     severity = CornerSeverity.Four;
                     break;
 
-                case var n when (n > CornerThresholds.Four && n <= CornerThresholds.Three) || (n < -CornerThresholds.Four && n >= -CornerThresholds.Three):
+                case var n when Math.Abs(n) > CornerThresholds.Four && Math.Abs(n) <= CornerThresholds.Three:
                     severity = CornerSeverity.Three;
                     break;
 
-                case var n when (n > CornerThresholds.Three && n <= CornerThresholds.Square) || (n < -CornerThresholds.Three && n >= -CornerThresholds.Square):
+                case var n when Math.Abs(n) > CornerThresholds.Three && Math.Abs(n) <= CornerThresholds.Square:
                     severity = CornerSeverity.Square;
                     break;
 
-                case var n when (n > CornerThresholds.Square && n <= CornerThresholds.Two) || (n < -CornerThresholds.Square && n >= -CornerThresholds.Two):
+                case var n when Math.Abs(n) > CornerThresholds.Square && Math.Abs(n) <= CornerThresholds.Two:
                     severity = CornerSeverity.Two;
                     break;
 
-                case var n when (n > CornerThresholds.Two && n <= CornerThresholds.One) || (n < -CornerThresholds.Two && n >= -CornerThresholds.One):
+                case var n when Math.Abs(n) > CornerThresholds.Two && Math.Abs(n) <= CornerThresholds.One:
                     severity = CornerSeverity.One;
                     break;
 
-                case var n when n > CornerThresholds.One || n < -CornerThresholds.One:
+                case var n when Math.Abs(n) > CornerThresholds.One:
                     severity = CornerSeverity.Hairpin;
                     break;
             }

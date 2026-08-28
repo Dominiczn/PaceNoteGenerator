@@ -11,69 +11,135 @@ namespace ConsoleTestApp
         {
             List<Node> nodes = new List<Node>
             {
-                new Node(52.36989, -0.456244),
-                new Node(52.369446, -0.455545),
-                new Node(52.368894, -0.454589),
-                new Node(52.368238, -0.453255),
-                new Node(52.367845, -0.452408),
-                new Node(52.367226, -0.450815),
-                new Node(52.366699, -0.44908),
-                new Node(52.366274, -0.447346),
-                new Node(52.365964, -0.445955),
-                new Node(52.365779, -0.444743),
-                new Node(52.365006, -0.438839),
-                new Node(52.364631, -0.43576),
-                new Node(52.364154, -0.431907),
-                new Node(52.363961, -0.430364),
-                new Node(52.363903, -0.429928),
-                new Node(52.363111, -0.424017),
-                new Node(52.363029, -0.423312),
-                new Node(52.362844, -0.42186),
-                new Node(52.362712, -0.42086),
-                new Node(52.36253, -0.419345),
-                new Node(52.36232, -0.417614),
-                new Node(52.361732, -0.413103),
-                new Node(52.361623, -0.412232),
-                new Node(52.361401, -0.411149),
-                new Node(52.36124, -0.410425),
-                new Node(52.360989, -0.409441),
-                new Node(52.360846, -0.40896),
-                new Node(52.360718, -0.4086),
+                new Node(52.087681, -0.017658),
+                new Node(52.087518, -0.018002),
+                new Node(52.08638, -0.020195),
+                new Node(52.086159, -0.020863),
+                new Node(52.086102, -0.021362),
+                new Node(52.08602, -0.022466),
+                new Node(52.085957, -0.022929),
+                new Node(52.084717, -0.027879),
+                new Node(52.084575, -0.028393),
+                new Node(52.08447, -0.028696),
+                new Node(52.084362, -0.028892),
+                new Node(52.084288, -0.02898),
+                new Node(52.084204, -0.029058),
+                new Node(52.084022, -0.029191),
+                new Node(52.083569, -0.029496),
+                new Node(52.083372, -0.029629),
+                new Node(52.08304, -0.029884),
+                new Node(52.082852, -0.030128),
+                new Node(52.082735, -0.030379),
+                new Node(52.0827, -0.030611),
+                new Node(52.082708, -0.030815),
+                new Node(52.082724, -0.030947),
+                new Node(52.082746, -0.031077),
+                new Node(52.082793, -0.031342),
+                new Node(52.082881, -0.031864),
+                new Node(52.082898, -0.032006),
+                new Node(52.082907, -0.032296),
+                new Node(52.082906, -0.032472),
+                new Node(52.082894, -0.032647),
+                new Node(52.082865, -0.032805),
+                new Node(52.082826, -0.032939),
+                new Node(52.082784, -0.03307),
+                new Node(52.082725, -0.033178),
+                new Node(52.082491, -0.033533),
+                new Node(52.082133, -0.034078),
+                new Node(52.082084, -0.034185),
+                new Node(52.082049, -0.034287),
+                new Node(52.082021, -0.034398),
+                new Node(52.082, -0.034517),
+                new Node(52.081989, -0.034641),
+                new Node(52.081983, -0.03523),
+                new Node(52.081929, -0.036667),
+                new Node(52.081918, -0.037444),
+                new Node(52.081928, -0.037873),
+                new Node(52.08193, -0.038001),
+                new Node(52.081947, -0.03837),
+                new Node(52.081945, -0.038386),
             };
 
-            /*
-            double angle = Geomath.CalculateTurnAngle(nodes[4], nodes[5], nodes[6]);
-            Console.WriteLine(angle);
-            */
+            
 
 
             PathAnalyser testPath = new PathAnalyser(nodes);
             {
-                /*
-                List<List<Node>> allGroups = new List<List<Node>>();
-                List<Node> usedNodes = new List<Node>();
-
-                for (int i = 0; i < nodes.Count; i++)
+                List<Pacenote> pacenotes = testPath.AnalysePath();
+                foreach (var n in pacenotes)
                 {
-                    if (nodes.Count > 3)
+                    Console.Write(n.CornerSeverity);
+                    Console.WriteLine(n.Direction);
+                    /*
+                    if (n.IsStraight == true) { Console.WriteLine(n.StraightLength); }
+                    else
                     {
-                        List<Node> group = testPath.GroupCorners();
-                        allGroups.Add(group);
-                        foreach (var node in group)
-                        {
-                            usedNodes.Add(node);
-                        }
-                        nodes.RemoveAll(n => usedNodes.Contains(n));
+                        Console.Write(n.CornerSeverity);
+                        Console.WriteLine(n.Direction);
                     }
 
-                    else { break; }
+                    */
                 }
-                */
-
-                Console.WriteLine(testPath.CalculateStraightLength(nodes));
             }
-            
-            
+
+            List<Node> nodesGroup = new List<Node>
+            {
+                new Node(52.087681, -0.017658),
+                new Node(52.087518, -0.018002),
+                new Node(52.08638, -0.020195),
+                new Node(52.086159, -0.020863),
+                new Node(52.086102, -0.021362),
+                new Node(52.08602, -0.022466),
+                new Node(52.085957, -0.022929),
+                new Node(52.084717, -0.027879),
+                new Node(52.084575, -0.028393),
+                new Node(52.08447, -0.028696),
+                new Node(52.084362, -0.028892),
+                new Node(52.084288, -0.02898),
+                new Node(52.084204, -0.029058),
+                new Node(52.084022, -0.029191),
+                new Node(52.083569, -0.029496),
+                new Node(52.083372, -0.029629),
+                new Node(52.08304, -0.029884),
+                new Node(52.082852, -0.030128),
+                new Node(52.082735, -0.030379),
+                new Node(52.0827, -0.030611),
+                new Node(52.082708, -0.030815),
+                new Node(52.082724, -0.030947),
+                new Node(52.082746, -0.031077),
+                new Node(52.082793, -0.031342),
+                new Node(52.082881, -0.031864),
+                new Node(52.082898, -0.032006),
+                new Node(52.082907, -0.032296),
+                new Node(52.082906, -0.032472),
+                new Node(52.082894, -0.032647),
+                new Node(52.082865, -0.032805),
+                new Node(52.082826, -0.032939),
+                new Node(52.082784, -0.03307),
+                new Node(52.082725, -0.033178),
+                new Node(52.082491, -0.033533),
+                new Node(52.082133, -0.034078),
+                new Node(52.082084, -0.034185),
+                new Node(52.082049, -0.034287),
+                new Node(52.082021, -0.034398),
+                new Node(52.082, -0.034517),
+                new Node(52.081989, -0.034641),
+                new Node(52.081983, -0.03523),
+                new Node(52.081929, -0.036667),
+                new Node(52.081918, -0.037444),
+                new Node(52.081928, -0.037873),
+                new Node(52.08193, -0.038001),
+                new Node(52.081947, -0.03837),
+                new Node(52.081945, -0.038386),
+            };
+
+            PathAnalyser groupnodes = new PathAnalyser(nodesGroup);
+            {
+                List<List<Node>> g = new List<List<Node>>();
+                groupnodes.GroupCorners(g);
+
+                Console.WriteLine(g);
+            }
         }
     }
 

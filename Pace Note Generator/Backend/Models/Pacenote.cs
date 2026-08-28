@@ -6,21 +6,21 @@ namespace Pace_Note_Generator.Backend
 {
     public struct Pacenote
     {
-        public Direction? direction;
-        public CornerSeverity? cornerSeverity;
-        public bool isStraight;
-        public int? straightLength;
-        public bool isLong;
-        public bool tightens;
-        public bool widens;
-        public string? hazard;
+        public Direction? Direction;
+        public CornerSeverity? CornerSeverity;
+        public bool IsStraight;
+        public double? StraightLength;
+        public bool IsLong;
+        public bool Tightens;
+        public bool Widens;
+        public string? Hazard;
 
         public Pacenote()
         {
-            isStraight = false;
-            isLong = false;
-            tightens = false;
-            widens = false;
+            IsStraight = false;
+            IsLong = false;
+            Tightens = false;
+            Widens = false;
         }
     }
 }

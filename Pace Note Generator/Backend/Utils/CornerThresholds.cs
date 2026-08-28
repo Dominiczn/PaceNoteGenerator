@@ -6,8 +6,8 @@ namespace Pace_Note_Generator.Backend.Utils
 {
     public static class CornerThresholds
     {
-        public const int Straight = 10;
-        public const int Six = 15;
+        public const int Straight = 5;
+        public const int Six = 10;
         public const int Five = 30;
         public const int Four = 60;
         public const int Three = 80;
