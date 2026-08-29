@@ -67,24 +67,28 @@
                 
                 <!--New Stage Button-->
                 <Border Grid.Row="1" CornerRadius="20" Background="#E2001A" Width ="150" Margin="5" Style="{StaticResource LowerBorderOpacity}">
-                    <Button Content="New Stage" 
+                    <Button Name="BtnNewStage"
+                            Content="New Stage" 
                             Height="50" Width="150" 
                             Background="Transparent" Foreground="White"
                             BorderBrush="Transparent" 
                             FontFamily="Segoe UI"
                             FontSize="15"
-                            Style="{StaticResource NoBlueButton}"/>
+                            Style="{StaticResource NoBlueButton}"
+                            Click="BtnNewStage_Click"/>
                 </Border>
 
                 <!--Open Stage Button-->
                 <Border Grid.Row="2" CornerRadius="20" BorderThickness="1" BorderBrush="#FEFBFB" Background="#141414" Width ="150" Margin="5" Style="{StaticResource LowerBorderOpacity}">
-                    <Button Content="Open Stage" 
+                    <Button Name="BtnOpenStage"
+                            Content="Open Stage" 
                             Height="50" Width="150" 
                             Background="Transparent" Foreground="White"
                             BorderBrush="Transparent" 
                             FontFamily="Segoe UI"
                             FontSize="15"
-                            Style="{StaticResource NoBlueButton}"/>
+                            Style="{StaticResource NoBlueButton}"
+                            Click="BtnOpenStage_Click"/>
                 </Border>
 
                 <!--Exit Button-->

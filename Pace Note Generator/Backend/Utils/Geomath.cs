@@ -57,13 +57,12 @@ namespace Pace_Note_Generator.Backend
         }
 
         //helper method so calculating the direction of a corner (3 nodes at a time) direction is only 1 method
-        public static Direction? CalculateNodesDirection(Node node1, Node node2, Node node3)
+        public static Direction CalculateNodesDirection(Node node1, Node node2, Node node3)
         {
-            double radius = Geomath.CalculateTurnAngle(node1, node2, node3);
+            double crossProduct = CalculateCrossProuct(node1, node2, node3);
 
-            if (radius >= CornerThresholds.Straight) { return Direction.Left; }
-            else if (radius <= -(CornerThresholds.Straight)) { return Direction.Right; }
-            else { return null; }
+            if (crossProduct >= 0) { return Direction.Left; }
+            else { return Direction.Right; }
         }
 
         public static CornerSeverity? ClassifyCornerSeverity(double cornerAngle)
@@ -112,21 +111,14 @@ namespace Pace_Note_Generator.Backend
         }
 
         //calculates the 2D cross product of the 3 nodes to figure out where a corner is and which way it turns
-        public static double CalculateTurnAngle(Node node1, Node node2, Node node3)
+        public static double CalculateCrossProuct(Node node1, Node node2, Node node3)
         {
             (double ABx, double ABy) = Geomath.ConvertToEquirectangular(node1, node2);
             (double BCx, double BCy) = Geomath.ConvertToEquirectangular(node2, node3);
 
-            double angleAB = Math.Atan2(ABy, ABx);
-            double angleBC = Math.Atan2(BCy, BCx);
+            double crossProduct = (ABx * BCy) - (BCx * ABy);
 
-            double angleDiff = angleBC - angleAB;
-
-            if (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
-            if (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
-
-            return ToDegrees(angleDiff);
-
+            return crossProduct;
         }
     }
 }

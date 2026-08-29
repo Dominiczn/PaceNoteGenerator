@@ -65,21 +65,7 @@ namespace ConsoleTestApp
 
             PathAnalyser testPath = new PathAnalyser(nodes);
             {
-                List<Pacenote> pacenotes = testPath.AnalysePath();
-                foreach (var n in pacenotes)
-                {
-                    Console.Write(n.CornerSeverity);
-                    Console.WriteLine(n.Direction);
-                    /*
-                    if (n.IsStraight == true) { Console.WriteLine(n.StraightLength); }
-                    else
-                    {
-                        Console.Write(n.CornerSeverity);
-                        Console.WriteLine(n.Direction);
-                    }
-
-                    */
-                }
+                testPath.GroupCorners();
             }
         }
     }

@@ -16,5 +16,14 @@ namespace Pace_Note_Generator
         {
             Application.Current.Shutdown();
         }
+
+        private void BtnNewStage_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        private void BtnOpenStage_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
