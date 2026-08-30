@@ -9,7 +9,6 @@ namespace Pace_Note_Generator.Backend
         Hairpin,
         One,
         Two,
-        Square,
         Three,
         Four,
         Five,

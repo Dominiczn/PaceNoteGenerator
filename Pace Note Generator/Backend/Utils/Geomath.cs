@@ -7,6 +7,7 @@ namespace Pace_Note_Generator.Backend
 {
     public static class Geomath
     {
+
         //converts node1's coordinates to local equirectangular approximation in meters relative to node2
         public static (double, double) ConvertToEquirectangular(Node node1, Node node2)
         {
@@ -57,52 +58,51 @@ namespace Pace_Note_Generator.Backend
         }
 
         //helper method so calculating the direction of a corner (3 nodes at a time) direction is only 1 method
-        public static Direction CalculateNodesDirection(Node node1, Node node2, Node node3)
+        public static Direction? CalculateNodesDirection(Node node1, Node node2, Node node3)
         {
             double crossProduct = CalculateCrossProuct(node1, node2, node3);
-
-            if (crossProduct >= 0) { return Direction.Left; }
-            else { return Direction.Right; }
+            if (Geomath.IsStraight(node1, node2, node3)) { return null; }
+            else
+            {
+                if (crossProduct >= 0) { return Direction.Left; }
+                else { return Direction.Right; }
+            }
         }
 
-        public static CornerSeverity? ClassifyCornerSeverity(double cornerAngle)
+        public static CornerSeverity? ClassifyCornerSeverity(double cornerSpeed)
         {
             CornerSeverity? severity = null;
-            switch(cornerAngle)
+            switch(cornerSpeed)
             {
-                case var a when Math.Abs(a) <= CornerThresholds.Straight:
+                case var v when v >= CornerThresholds.Straight:
                     severity = CornerSeverity.Straight;
                     break;
 
-                case var a when Math.Abs(a) > CornerThresholds.Straight && Math.Abs(a) <= CornerThresholds.Six:
+                case var v when v < CornerThresholds.Straight && v >= CornerThresholds.Six:
                     severity = CornerSeverity.Six;
                     break;
 
-                case var a when Math.Abs(a) > CornerThresholds.Six && Math.Abs(a) <= CornerThresholds.Five:
+                case var v when v < CornerThresholds.Six && v >= CornerThresholds.Five:
                     severity = CornerSeverity.Five;
                     break;
 
-                case var a when Math.Abs(a) > CornerThresholds.Five && Math.Abs(a) <= CornerThresholds.Four:
+                case var v when v < CornerThresholds.Five && v >= CornerThresholds.Four:
                     severity = CornerSeverity.Four;
                     break;
 
-                case var a when Math.Abs(a) > CornerThresholds.Four && Math.Abs(a) <= CornerThresholds.Three:
+                case var v when v < CornerThresholds.Four && v >= CornerThresholds.Three:
                     severity = CornerSeverity.Three;
                     break;
 
-                case var a when Math.Abs(a) > CornerThresholds.Three && Math.Abs(a) <= CornerThresholds.Square:
-                    severity = CornerSeverity.Square;
-                    break;
-
-                case var a when Math.Abs(a) > CornerThresholds.Square && Math.Abs(a) <= CornerThresholds.Two:
+                case var v when v < CornerThresholds.Three && v >= CornerThresholds.Two:
                     severity = CornerSeverity.Two;
                     break;
 
-                case var a when Math.Abs(a) > CornerThresholds.Two && Math.Abs(a) <= CornerThresholds.One:
+                case var v when v < CornerThresholds.Two && v >= CornerThresholds.One:
                     severity = CornerSeverity.One;
                     break;
 
-                case var a when Math.Abs(a) > CornerThresholds.One:
+                case var v when v < CornerThresholds.One:
                     severity = CornerSeverity.Hairpin;
                     break;
             }
@@ -119,6 +119,19 @@ namespace Pace_Note_Generator.Backend
             double crossProduct = (ABx * BCy) - (BCx * ABy);
 
             return crossProduct;
+        }
+        
+        public static int CalculateCorneringSpeed(Node node1, Node node2, Node node3)
+        {
+            double radius = CircumcircleRadius(node1, node2, node3);
+            return (int)Math.Sqrt(CornerThresholds.ComfortableCorneringGForce * radius * 9.81);
+        }
+
+        public static bool IsStraight(Node node1, Node node2, Node node3)
+        {
+            if (CalculateCorneringSpeed(node1, node2, node3) >= CornerThresholds.Straight) { return true; }
+            else {  return false; }
+
         }
     }
 }

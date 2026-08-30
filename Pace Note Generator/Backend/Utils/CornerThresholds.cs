@@ -6,14 +6,15 @@ namespace Pace_Note_Generator.Backend.Utils
 {
     public static class CornerThresholds
     {
-        public const int Straight = 5;
-        public const int Six = 10;
-        public const int Five = 30;
-        public const int Four = 60;
-        public const int Three = 80;
-        public const int Square = 90;
-        public const int Two = 110;
-        public const int One = 140;
-        public const int Hairpin = 170;
+        public const double ComfortableCorneringGForce = 0.3;
+
+        //these are the minimum speeds in m/s for the corner (except One as that is the maximum and anything below 6m/s is a hairpin
+        public const int Straight = 27;
+        public const int Six = 22;
+        public const int Five = 18;
+        public const int Four = 14;
+        public const int Three = 11;
+        public const int Two = 8;
+        public const int One = 6;
     }
 }

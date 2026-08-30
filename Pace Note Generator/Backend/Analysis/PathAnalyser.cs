@@ -14,8 +14,6 @@ namespace Pace_Note_Generator.Backend.Analysis
         {
             NodeList = new List<Node>(nodeList);
         }
-
-        /*
         public List<Pacenote> AnalysePath()
         {
             List<Pacenote> pacenotes = new List<Pacenote>();
@@ -34,7 +32,7 @@ namespace Pace_Note_Generator.Backend.Analysis
 
             return pacenotes;
         }
-        */
+        
 
         public List<List<Node>> GroupCorners()
         {
@@ -45,20 +43,21 @@ namespace Pace_Note_Generator.Backend.Analysis
 
         //Groups nodes on a route into left corners, right corners, and straights
         //TODO: last few nodes get cut off if number of nodes in list isnt multiple of 3. FIX IT
-        public void GroupCornersRecursive(List<List<Node>> allGroups)
+        private void GroupCornersRecursive(List<List<Node>> allGroups)
         {
-            if (NodeList.Count <= 3) { return; }
+            if (NodeList.Count < 3) { return; }
 
             List<Node> group = new List<Node>();
             Direction? nodesGroupDirection = Geomath.CalculateNodesDirection(NodeList[0], NodeList[1], NodeList[2]);
-            NodeList[0].Direction = nodesGroupDirection;
+            NodeList[1].Direction = nodesGroupDirection;
+            group.Add(NodeList[1]);
 
-            for (int i = 1; i < NodeList.Count; i++)
+            for (int i = 2; i < NodeList.Count; i++)
             {
-                if (i < NodeList.Count - 1)
+                if (i < NodeList.Count - 2)
                 {
                     Direction? nodesDirection = Geomath.CalculateNodesDirection(NodeList[i - 1], NodeList[i], NodeList[i + 1]);
-                    if (nodesDirection != nodesGroupDirection) { break; }
+                    if ( nodesDirection != nodesGroupDirection ) { break; }
 
                     NodeList[i].Direction = nodesDirection;
                     group.Add(NodeList[i]);
@@ -71,35 +70,49 @@ namespace Pace_Note_Generator.Backend.Analysis
             GroupCornersRecursive(allGroups);
         }
 
-        /*
-
         //Helper method that joins direction and severity classification into 1
         private Pacenote ClassifyCorner(List<Node> corner, List<List<Node>> allCorners)
         {
-            if (corner.Count == 1 && corner[0].Direction != null) { corner = Add1ForwardsNodeToCorner(corner, allCorners); }
-            else if (corner.Count == 2 && corner[0].Direction != null) { corner = Add1ForwardsAnd1BackwardsNodeToCorner(corner, allCorners); }
-            Pacenote pacenote = CalculateCornerSeverity(corner);
-            pacenote.Direction = ClassifyCornerDirection(corner);
+            Pacenote pacenote = new Pacenote();
+
+            if (corner.Count == 2 && corner[0].Direction != null) { corner = Add1ForwardsNodeToCorner(corner, allCorners); }
+            else if (corner.Count == 1 && corner[0].Direction != null) { corner = Add1ForwardsAnd1BackwardsNodeToCorner(corner, allCorners); }
+
+            if (corner.Count < 3) { pacenote.CornerSeverity = CornerSeverity.Straight; pacenote.Direction = null; }
+            else
+            {
+                pacenote = CalculateCornerSeverity(corner);
+                pacenote.Direction = CalculateCornerDirection(corner);
+            }
 
             return pacenote;
         }
 
+        private Direction? CalculateCornerDirection(List<Node> corner)
+        {
+            return corner[1].Direction;
+        }
+
         //decides what pacenote to give each group of nodes grouped by corner
-        //TODO: This needs to be changed to circumcircle radius rather than using the turn angle
         private Pacenote CalculateCornerSeverity(List<Node> corner)
         {
             Pacenote pacenote = new Pacenote();
-            double lowestRadius = 0;
-            for (int i = 1; i < corner.Count - 1; i++)
+            
+            if (corner[1].Direction == null) { pacenote.CornerSeverity = CornerSeverity.Straight; }
+            else
             {
-                double currentCircimcircleRadius = Geomath.CalculateTurnAngle(corner[i - 1], corner[i], corner[i + 1]);
+                double highestSpeed = 0;
+                for (int i = 1; i < corner.Count - 1; i++)
+                {
+                    int currentSpeed = Geomath.CalculateCorneringSpeed(corner[i - 1], corner[i], corner[i + 1]);
 
-                if (Math.Abs(currentCircimcircleRadius) > Math.Abs(lowestRadius)) { lowestRadius = currentCircimcircleRadius; }
+                    if (currentSpeed > highestSpeed) { highestSpeed = currentSpeed; }
+                }
+
+                pacenote.CornerSeverity = Geomath.ClassifyCornerSeverity(highestSpeed);
             }
-
-            pacenote.CornerSeverity = Geomath.ClassifyCornerSeverity(lowestRadius);
-            if (Math.Abs(lowestRadius) <= CornerThresholds.Straight) { pacenote.IsStraight = true; }
-
+            
+            if (pacenote.CornerSeverity == CornerSeverity.Straight) { pacenote.IsStraight = true; }
             return pacenote;
         }
 
@@ -122,8 +135,6 @@ namespace Pace_Note_Generator.Backend.Analysis
             return corner;
         }
 
-        */
-
         private List<Node> Add1ForwardsAnd1BackwardsNodeToCorner(List<Node> corner, List<List<Node>> allCorners)
         {
             int cornerIndexInAllCorners = 0;
@@ -138,13 +149,13 @@ namespace Pace_Note_Generator.Backend.Analysis
                 corner.Insert(0, allCorners[cornerIndexInAllCorners - 1].Last());
             }
 
-            else { Console.WriteLine("Corner is at the edge"); }
+            //else { Console.WriteLine("Corner is at the edge"); }
 
             return corner;
         }
         
         //calculates the length of a straight by adding up the individual distances between all nodes in the straight
-        private double CalculateStraightLength(List<Node> straightNodes)
+        public double CalculateStraightLength(List<Node> straightNodes)
         {
             double distance = 0;
             for (int i = 1; i < straightNodes.Count; i++)

@@ -65,7 +65,19 @@ namespace ConsoleTestApp
 
             PathAnalyser testPath = new PathAnalyser(nodes);
             {
-                testPath.GroupCorners();
+                
+                List<Pacenote> pacenotes = testPath.AnalysePath();
+                for (int i = 0; i < pacenotes.Count; i++)
+                {
+                    if (pacenotes[i].IsStraight == true && pacenotes[i].StraightLength < 100) { continue; }
+                    Console.WriteLine($"{pacenotes[i].CornerSeverity} {pacenotes[i].Direction}");
+                }
+                
+
+                //testPath.GroupCorners();
+
+                //Console.WriteLine(Geomath.CircumcircleRadius(nodes[2], nodes[3], nodes[4]));
+                //Console.WriteLine(Geomath.CalculateCrossProuct(nodes[0], nodes[1], nodes[2]));
             }
         }
     }
