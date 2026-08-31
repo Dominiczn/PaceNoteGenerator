@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="Pace_Note_Generator.Frontend.UserControls.MainMenu.MainMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pace_Note_Generator.Frontend.UserControls.MainMenu"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Image Source="/Frontend/UserControls/MainMenu/Transparent Background.png" Opacity="0.3" Stretch="UniformToFill"/>
+
+        <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+
+                <!--Title-->
+                <TextBlock Grid.Row="0" 
+                   Text="Pace Note Generator" 
+                   TextAlignment="Center"
+                   Margin="10"
+                   Foreground="#FEFBFB"
+                   FontFamily="Bahnschrift"
+                   FontWeight="Bold"
+                   FontSize="45"/>
+
+                <!--New Stage Button-->
+                <Border Grid.Row="1" CornerRadius="20" Background="#E2001A" Width ="150" Margin="5" Style="{StaticResource LowerBorderOpacity}">
+                    <Button Name="BtnNewStage"
+                    Content="New Stage" 
+                    Height="50" Width="150" 
+                    Background="Transparent" Foreground="White"
+                    BorderBrush="Transparent" 
+                    FontFamily="Segoe UI"
+                    FontSize="15"
+                    Style="{StaticResource NoBlueButton}"
+                    Click="BtnNewStage_Click"/>
+                </Border>
+
+                <!--Open Stage Button-->
+                <Border Grid.Row="2" CornerRadius="20" BorderThickness="1" BorderBrush="#FEFBFB" Background="#141414" Width ="150" Margin="5" Style="{StaticResource LowerBorderOpacity}">
+                    <Button Name="BtnOpenStage"
+                    Content="Open Stage" 
+                    Height="50" Width="150" 
+                    Background="Transparent" Foreground="White"
+                    BorderBrush="Transparent" 
+                    FontFamily="Segoe UI"
+                    FontSize="15"
+                    Style="{StaticResource NoBlueButton}"
+                    Click="BtnOpenStage_Click"/>
+                </Border>
+
+                <!--Exit Button-->
+                <Button Name="BtnExit"
+                Grid.Row="3"
+                Content="Exit"
+                Width ="30"
+                Background="Transparent" Foreground="White"
+                BorderThickness="0"
+                FontFamily="Segoe UI"
+                Style="{StaticResource NoBlueButton}"
+                Click="BtnExit_Click"/>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</UserControl>

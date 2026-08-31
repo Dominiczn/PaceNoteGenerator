@@ -23,12 +23,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Frontend\Transparent Background.png" />
+    <Resource Include="Frontend\UserControls\MainMenu\Transparent Background.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Backend\API\" />
     <Folder Include="Backend\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GMap.NET.WinPresentation" Version="2.1.7" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.1" />
   </ItemGroup>
 
 </Project>
