@@ -19,14 +19,15 @@
                 </Grid.RowDefinitions>
 
                 <!--Title-->
-                <TextBlock Grid.Row="0" 
-                   Text="Pace Note Generator" 
-                   TextAlignment="Center"
-                   Margin="10"
-                   Foreground="#FEFBFB"
-                   FontFamily="Bahnschrift"
-                   FontWeight="Bold"
-                   FontSize="45"/>
+                <TextBlock Grid.Row="0"
+                           TextAlignment="Center"
+                           Margin="10"
+                           FontFamily="Bahnschrift"
+                           FontWeight="Bold"
+                           FontSize="45">
+                    <Run Text="Pace Note" Foreground="#FEFBFB"/>
+                    <Run Text="Generator" Foreground="#E2001A"/>
+                </TextBlock>
 
                 <!--New Stage Button-->
                 <Border Grid.Row="1" CornerRadius="20" Background="#E2001A" Width ="150" Margin="5" Style="{StaticResource LowerBorderOpacity}">
