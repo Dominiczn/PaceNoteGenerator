@@ -11,6 +11,6 @@
         Background="#141414">
     
     <Grid>
-        <ContentControl x:Name="MainContent"></ContentControl>
+        <ContentControl x:Name="MainContent"/>
     </Grid>
 </Window>

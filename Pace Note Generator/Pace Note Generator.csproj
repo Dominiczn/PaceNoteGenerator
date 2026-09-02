@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Backend\API\" />
     <Folder Include="Backend\Services\" />
   </ItemGroup>
 
