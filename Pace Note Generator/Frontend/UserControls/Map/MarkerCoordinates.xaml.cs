@@ -13,14 +13,13 @@ using System.Windows.Shapes;
 
 namespace Pace_Note_Generator.Frontend.UserControls.Map
 {
-    /// <summary>
-    /// Interaction logic for MarkerCoordinates.xaml
-    /// </summary>
     public partial class MarkerCoordinates : UserControl
     {
         public MarkerCoordinates()
         {
             InitializeComponent();
+            //RectWaypointPositionIndicator.Fill = new SolidColorBrush(System.Windows.Media.Colors.AliceBlue);
+            //TxtDisplayCoordinates.BorderBrush = new SolidColorBrush(System.Windows.Media.Colors.AliceBlue);
         }
     }
 }

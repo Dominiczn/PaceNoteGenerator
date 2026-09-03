@@ -11,7 +11,6 @@ namespace ConsoleTestApp
         {
             List<Node> nodes = new List<Node>
             {
-                new Node(52.087681, -0.017658),
                 new Node(52.087518, -0.018002),
                 new Node(52.08638, -0.020195),
                 new Node(52.086159, -0.020863),
