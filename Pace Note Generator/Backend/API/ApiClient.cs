@@ -9,6 +9,11 @@ namespace Pace_Note_Generator.Backend.API
     {
         protected readonly HttpClient httpClient = new HttpClient();
 
+        protected ApiClient()
+        {
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("PacenoteGenerator/1.0");
+        }
+
         public async Task<string> SendRequest(string url)
         {
             return await httpClient.GetStringAsync(url);

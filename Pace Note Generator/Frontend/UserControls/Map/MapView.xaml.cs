@@ -1,15 +1,16 @@
 ﻿using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
+using Pace_Note_Generator.Backend;
+using Pace_Note_Generator.Backend.API;
+using Pace_Note_Generator.Backend.Enums_and_Structs;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Shapes;
 using System.Windows.Media;
-using System.Diagnostics;
-using Pace_Note_Generator.Backend;
-using Pace_Note_Generator.Backend.Enums_and_Structs;
-using Pace_Note_Generator.Backend.API;
+using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace Pace_Note_Generator.Frontend.UserControls.Map
 {
@@ -40,9 +41,36 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             MapButtonsPanel.CalculateRoute += CalculateRoute;
         }
 
-        private void CalculateRoute(object? sender, EventArgs e)
+        private async void CalculateRoute(object? sender, EventArgs e)
         {
-            
+            var routingAPI = new OsrmApiClient();
+            List<Node> nodes = await routingAPI.FetchRoute(waypoints);
+
+            List<PointLatLng> nodeCoordinates = new List<PointLatLng>();
+            for(int i = 0; i < nodes.Count; i++)
+            {
+                nodeCoordinates.Add(new PointLatLng(nodes[i].Latitude, nodes[i].Longitude));
+                
+                if (nodeCoordinates.Count > 1)
+                {
+                    List<PointLatLng> groupsOfNodes = new List<PointLatLng>();
+                    groupsOfNodes.Add(nodeCoordinates[i - 1]);
+                    groupsOfNodes.Add(nodeCoordinates[i]);
+
+                    GMapPolygon polygon = new GMapPolygon(groupsOfNodes);
+                    MapControl.RegenerateShape(polygon);
+
+                    (polygon.Shape as Path).Stroke = Brushes.DarkBlue;
+                    (polygon.Shape as Path).StrokeThickness = 5;
+                    (polygon.Shape as Path).Effect = null;
+
+                    MapControl.Markers.Add(polygon);
+
+
+                    groupsOfNodes.Clear();
+                }
+                
+            }
         }
 
         private void RemoveMarker_Checkpoint(object? sender, EventArgs e)
@@ -52,6 +80,11 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             if (numWaypoints != 0) { waypoints.RemoveAt(waypoints.Count - 1); }
             MapControl.Markers.RemoveAt(waypoints.Count);
             StcPnlButtonsHolder.Children.RemoveAt(StcPnlButtonsHolder.Children.Count - 1);
+
+            foreach (var poly in MapControl.Markers.OfType<GMapPolygon>().ToList())
+            {
+                MapControl.Markers.Remove(poly);
+            }
         }
 
         private void AddMarker_Checkpoint(object? sender, EventArgs e)
@@ -114,8 +147,6 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             markerCoordinates.Foreground = Brushes.White;
             StcPnlButtonsHolder.Children.Add(markerCoordinates);
             isPlacingMarker = false;
-
-            Debug.WriteLine(waypoints.Count);
         }
     }
 

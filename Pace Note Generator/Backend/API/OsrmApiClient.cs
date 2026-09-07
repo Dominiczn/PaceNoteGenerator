@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net.Http;
-using System.Threading.Channels;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace Pace_Note_Generator.Backend.API
 {
@@ -17,7 +12,7 @@ namespace Pace_Note_Generator.Backend.API
             string json = await SendRequest(url);
 
             using JsonDocument doc = JsonDocument.Parse(json);
-            var coordinatesArray = doc.RootElement.GetProperty("routes")[0].GetProperty("geometry").GetProperty(coordinates);
+            var coordinatesArray = doc.RootElement.GetProperty("routes")[0].GetProperty("geometry").GetProperty("coordinates");
 
             List<Node> routeNodes = new List<Node>();
 
