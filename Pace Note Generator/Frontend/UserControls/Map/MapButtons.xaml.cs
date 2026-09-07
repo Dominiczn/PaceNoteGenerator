@@ -12,6 +12,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
 
         public event EventHandler? CheckpointAdded;
         public event EventHandler? CheckpointRemoved;
+        public event EventHandler? CalculateRoute;
 
         private void BtnAddCheckpoint_Click(object sender, RoutedEventArgs e)
         {
@@ -25,7 +26,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
 
         private void BtnCalculateRoute_Click(object sender, RoutedEventArgs e)
         {
-
+            CalculateRoute?.Invoke(this, EventArgs.Empty);
         }
     }
 }

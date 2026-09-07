@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Diagnostics;
 using Pace_Note_Generator.Backend;
 using Pace_Note_Generator.Backend.Enums_and_Structs;
+using Pace_Note_Generator.Backend.API;
 
 namespace Pace_Note_Generator.Frontend.UserControls.Map
 {
@@ -36,6 +37,12 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             MapControl.MouseLeftButtonUp += MapControl_MouseLeftButtonUp;
             MapButtonsPanel.CheckpointAdded += AddMarker_Checkpoint;
             MapButtonsPanel.CheckpointRemoved += RemoveMarker_Checkpoint;
+            MapButtonsPanel.CalculateRoute += CalculateRoute;
+        }
+
+        private void CalculateRoute(object? sender, EventArgs e)
+        {
+            
         }
 
         private void RemoveMarker_Checkpoint(object? sender, EventArgs e)
@@ -44,6 +51,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             if (numWaypoints == 0) { return; }
             if (numWaypoints != 0) { waypoints.RemoveAt(waypoints.Count - 1); }
             MapControl.Markers.RemoveAt(waypoints.Count);
+            StcPnlButtonsHolder.Children.RemoveAt(StcPnlButtonsHolder.Children.Count - 1);
         }
 
         private void AddMarker_Checkpoint(object? sender, EventArgs e)
@@ -61,6 +69,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             if (!isPlacingMarker) { return; }
             WaypointType type;
             var markerCoordinates = new MarkerCoordinates();
+            markerCoordinates.BorderThickness = new Thickness(5);
 
             Point upPosition = e.GetPosition(MapControl);
             double distance = (upPosition - mouseDownPosition).Length;
@@ -90,8 +99,8 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
                 if (waypoints.Count >= 2)
                 {
                     waypoints[^1].Type = WaypointType.Checkpoint; 
-                    ((Ellipse)waypoints[^1].Marker.Shape).Fill = Brushes.DarkBlue; 
-                    markerCoordinates.BorderBrush = Brushes.DarkBlue;
+                    ((Ellipse)waypoints[^1].Marker!.Shape).Fill = Brushes.DarkBlue;
+                    ((MarkerCoordinates)StcPnlButtonsHolder.Children[^1]).BorderBrush = Brushes.DarkBlue;
                 }
                 type = WaypointType.End; 
                 ((Ellipse)marker.Shape).Fill = Brushes.Red;
@@ -101,7 +110,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             waypoint.Marker = marker;
             waypoints.Add(waypoint);
             MapControl.Markers.Add(marker);
-            markerCoordinates.Content = $"dsfsdfdsdff";
+            markerCoordinates.Content = $"{waypoint.Latitude}, {waypoint.Longitude}";
             markerCoordinates.Foreground = Brushes.White;
             StcPnlButtonsHolder.Children.Add(markerCoordinates);
             isPlacingMarker = false;

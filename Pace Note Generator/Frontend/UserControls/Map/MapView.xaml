@@ -17,7 +17,6 @@
                 VerticalAlignment="Top" HorizontalAlignment="Left">
             <StackPanel x:Name="StcPnlButtonsHolder">
                 <userControls:MapButtons x:Name="MapButtonsPanel"/>
-                <userControls:MarkerCoordinates/>
             </StackPanel>
         </Border>
     </Grid>
