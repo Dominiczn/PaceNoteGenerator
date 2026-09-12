@@ -39,6 +39,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             MapButtonsPanel.CalculateRoute += CalculateRoute;
         }
 
+        //Add ClearRoute method
         private async void CalculateRoute(object? sender, EventArgs e)
         {
             var routingAPI = new OsrmApiClient();
@@ -58,9 +59,9 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
                     GMapPolygon polygon = new GMapPolygon(groupsOfNodes);
                     MapControl.RegenerateShape(polygon);
 
-                    (polygon.Shape as Path).Stroke = Brushes.DarkBlue;
-                    (polygon.Shape as Path).StrokeThickness = 5;
-                    (polygon.Shape as Path).Effect = null;
+                    (polygon.Shape as Path)!.Stroke = Brushes.DarkBlue;
+                    (polygon.Shape as Path)!.StrokeThickness = 5;
+                    (polygon.Shape as Path)!.Effect = null;
 
                     MapControl.Markers.Add(polygon);
 
@@ -73,11 +74,17 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
 
         private void RemoveMarker_Checkpoint(object? sender, EventArgs e)
         {
-            int numWaypoints = waypoints.Count;
-            if (numWaypoints == 0) { return; }
-            if (numWaypoints != 0) { waypoints.RemoveAt(waypoints.Count - 1); }
-            MapControl.Markers.RemoveAt(waypoints.Count);
+            if (waypoints.Count == 0) { return; }
+            waypoints.RemoveAt(waypoints.Count - 1);
+            MapControl.Markers.RemoveAt(MapControl.Markers.Count - 1);
             StcPnlButtonsHolder.Children.RemoveAt(StcPnlButtonsHolder.Children.Count - 1);
+
+            if (waypoints.Count > 1)
+            {
+                waypoints[^1].Type = WaypointType.End;
+                ((Ellipse)waypoints[^1].Marker!.Shape).Fill = Brushes.Red;
+                ((MarkerCoordinates)StcPnlButtonsHolder.Children[^1]).BorderBrush = Brushes.Red;
+            }
 
             foreach (var poly in MapControl.Markers.OfType<GMapPolygon>().ToList())
             {
