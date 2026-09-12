@@ -42,6 +42,9 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
         //Add ClearRoute method
         private async void CalculateRoute(object? sender, EventArgs e)
         {
+            if (isPlacingMarker) { return; }
+            if (waypoints.Count < 2) { return; }
+            ClearRoute();
             var routingAPI = new OsrmApiClient();
             List<Node> nodes = await routingAPI.FetchRoute(waypoints);
 
@@ -72,11 +75,26 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             }
         }
 
+        private void ClearRoute()
+        {
+            foreach (var poly in MapControl.Markers.OfType<GMapPolygon>().ToList())
+            {
+                MapControl.Markers.Remove(poly);
+            }
+        }
+
         private void RemoveMarker_Checkpoint(object? sender, EventArgs e)
         {
+            if (isPlacingMarker) { return; }
             if (waypoints.Count == 0) { return; }
+            
+            for (int i = 0; i < waypoints.Count; i++)
+            {
+                //this is fine as all the markers for waypoints are at the start of MapControl.Markers
+                if (MapControl.Markers[i].Position.Lng == waypoints[^1].Longitude && MapControl.Markers[i].Position.Lat == waypoints[^1].Latitude) { MapControl.Markers.RemoveAt(i); }
+            }
+
             waypoints.RemoveAt(waypoints.Count - 1);
-            MapControl.Markers.RemoveAt(MapControl.Markers.Count - 1);
             StcPnlButtonsHolder.Children.RemoveAt(StcPnlButtonsHolder.Children.Count - 1);
 
             if (waypoints.Count > 1)
@@ -85,16 +103,15 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
                 ((Ellipse)waypoints[^1].Marker!.Shape).Fill = Brushes.Red;
                 ((MarkerCoordinates)StcPnlButtonsHolder.Children[^1]).BorderBrush = Brushes.Red;
             }
+            
 
-            foreach (var poly in MapControl.Markers.OfType<GMapPolygon>().ToList())
-            {
-                MapControl.Markers.Remove(poly);
-            }
+            ClearRoute();
         }
 
         private void AddMarker_Checkpoint(object? sender, EventArgs e)
         {
-            isPlacingMarker = true;
+            if (isPlacingMarker) { isPlacingMarker = false; }
+            else { isPlacingMarker = true; }
         }
 
         private void MapControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
