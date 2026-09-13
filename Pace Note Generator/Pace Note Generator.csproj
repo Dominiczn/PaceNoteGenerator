@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Frontend\Taskbar Icon.png" />
     <None Remove="Frontend\Transparent Background.png" />
     <None Remove="Transparent Background.png" />
   </ItemGroup>
@@ -23,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Frontend\Taskbar Icon.png" />
     <Resource Include="Frontend\UserControls\MainMenu\Transparent Background.png" />
   </ItemGroup>
 

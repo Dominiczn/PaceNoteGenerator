@@ -4,13 +4,11 @@ using GMap.NET.WindowsPresentation;
 using Pace_Note_Generator.Backend;
 using Pace_Note_Generator.Backend.API;
 using Pace_Note_Generator.Backend.Enums_and_Structs;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Xml.Linq;
 
 namespace Pace_Note_Generator.Frontend.UserControls.Map
 {

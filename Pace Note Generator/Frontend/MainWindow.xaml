@@ -8,7 +8,8 @@
         Title="Pace Note Generator" 
         Height="450" Width="800"
         WindowState="Maximized"
-        Background="#141414">
+        Background="#141414"
+        Icon="Taskbar Icon.png">
     
     <Grid>
         <ContentControl x:Name="MainContent"/>
