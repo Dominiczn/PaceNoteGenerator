@@ -9,7 +9,7 @@
         Height="450" Width="800"
         WindowState="Maximized"
         Background="#141414"
-        Icon="Taskbar Icon.png">
+        Icon="UserControls/Images/Taskbar Icon.png">
     
     <Grid>
         <ContentControl x:Name="MainContent"/>

@@ -10,8 +10,9 @@
         <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="10">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50*"/>
-                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
@@ -54,7 +55,7 @@
                 </Grid>
 
                 <!--Calculate Route button-->
-                <Border Grid.Row="1" CornerRadius="20" Background="#E2001A" Width ="150" Margin="5" Style="{StaticResource LowerBorderOpacity}">
+                <Border Grid.Row="1" CornerRadius="20" Background="#C9283B" Width ="150" Margin="5" Style="{StaticResource LowerBorderOpacity}">
                     <Button Name="BtnCalculateRoute"
                             Content="Calculate Route" 
                             Height="50" Width="150" 
@@ -64,6 +65,19 @@
                             FontSize="15"
                             Style="{StaticResource NoBlueButton}"
                             Click="BtnCalculateRoute_Click"/>
+                </Border>
+
+                <!--Generate Pacenotes button-->
+                <Border Grid.Row="2" CornerRadius="20" Background="#E2001A" Width ="150" Margin="5" Style="{StaticResource LowerBorderOpacity}">
+                    <Button Name="BtnGeneratePacenotes"
+                            Content="Generate Pacenotes" 
+                            Height="50" Width="150" 
+                            Background="Transparent" Foreground="White"
+                            BorderBrush="Transparent" 
+                            FontFamily="Segoe UI"
+                            FontSize="15"
+                            Style="{StaticResource NoBlueButton}"
+                            Click="BtnGeneratePacenotes_Click"/>
                 </Border>
             </Grid>
         </Viewbox>

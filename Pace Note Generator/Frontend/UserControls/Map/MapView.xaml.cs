@@ -2,8 +2,10 @@
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
 using Pace_Note_Generator.Backend;
+using Pace_Note_Generator.Backend.Analysis;
 using Pace_Note_Generator.Backend.API;
 using Pace_Note_Generator.Backend.Enums_and_Structs;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,6 +19,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
         private Point mouseDownPosition;
         private bool isPlacingMarker = false;
         private List<Waypoint> waypoints = new List<Waypoint>();
+        private List<Node> nodes = new List<Node>();
         public MapView()
         {
             InitializeComponent();
@@ -37,16 +40,31 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             MapButtonsPanel.CheckpointAdded += AddMarker_Checkpoint;
             MapButtonsPanel.CheckpointRemoved += RemoveMarker_Checkpoint;
             MapButtonsPanel.CalculateRoute += CalculateRoute;
+            MapButtonsPanel.GeneratePacenotes += GeneratePacenotes;
         }
 
-        //Add ClearRoute method
+        private void GeneratePacenotes(object? sender, EventArgs e)
+        {
+            if (nodes.Count == 0) { return; }
+            PathAnalyser testPath = new PathAnalyser(nodes);
+            {
+
+                List<Pacenote> pacenotes = testPath.AnalysePath();
+                for (int i = 0; i < pacenotes.Count; i++)
+                {
+                    if (pacenotes[i].IsStraight == true && pacenotes[i].StraightLength < 100) { continue; }
+                    Debug.WriteLine($"{pacenotes[i].CornerSeverity} {pacenotes[i].Direction}");
+                }
+            }
+        }
+
         private async void CalculateRoute(object? sender, EventArgs e)
         {
             if (isPlacingMarker) { return; }
             if (waypoints.Count < 2) { return; }
             ClearRoute();
             var routingAPI = new OsrmApiClient();
-            List<Node> nodes = await routingAPI.FetchRoute(waypoints);
+            nodes = await routingAPI.FetchRoute(waypoints);
 
             List<PointLatLng> nodeCoordinates = new List<PointLatLng>();
             for(int i = 0; i < nodes.Count; i++)
@@ -73,6 +91,8 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
                 }
                 
             }
+
+
         }
 
         private void ClearRoute()
@@ -81,6 +101,8 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             {
                 MapControl.Markers.Remove(poly);
             }
+
+            nodes.Clear();
         }
 
         private void RemoveMarker_Checkpoint(object? sender, EventArgs e)
