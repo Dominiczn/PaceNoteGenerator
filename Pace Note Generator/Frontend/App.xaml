@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Pace_Note_Generator"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!--This removes the default blue border on mouse hover and lowers text opacity-->
+        <!--This removes the default blue tint on mouse hover and lowers text opacity-->
         <Style x:Key="NoBlueButton" TargetType="Button">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
