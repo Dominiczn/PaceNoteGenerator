@@ -12,7 +12,9 @@
             <RowDefinition Height="50*"/>
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
-        
-        
+
+        <TextBlock Grid.Row="2"
+                   x:Name="TxtPacenoteCounter"
+                   />
     </Grid>
 </UserControl>
