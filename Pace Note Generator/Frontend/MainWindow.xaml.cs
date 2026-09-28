@@ -1,6 +1,5 @@
 ﻿using Pace_Note_Generator.Frontend.UserControls.MainMenu;
 using Pace_Note_Generator.Frontend.UserControls.Map;
-using System.ComponentModel;
 using System.Windows;
 
 namespace Pace_Note_Generator
