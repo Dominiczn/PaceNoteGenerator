@@ -20,6 +20,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
         private bool isPlacingMarker = false;
         private List<Waypoint> waypoints = new List<Waypoint>();
         private List<Node> nodes = new List<Node>();
+
         public MapView()
         {
             InitializeComponent();
@@ -135,22 +136,24 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             else { isPlacingMarker = true; }
         }
 
-        private void MapControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void MapControl_MouseLeftButtonDown(object? sender, MouseButtonEventArgs e)
         {
             mouseDownPosition = e.GetPosition(MapControl);
         }
 
-        private void MapControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        //Incharge of placing markers
+        private void MapControl_MouseLeftButtonUp(object? sender, MouseButtonEventArgs e)
         {
             if (!isPlacingMarker) { return; }
-            WaypointType type;
-            var markerCoordinates = new MarkerCoordinates();
-            markerCoordinates.BorderThickness = new Thickness(5);
 
             Point upPosition = e.GetPosition(MapControl);
             double distance = (upPosition - mouseDownPosition).Length;
 
             if (distance > 5) { return; }
+
+            WaypointType type;
+            var markerCoordinates = new MarkerCoordinates();
+            markerCoordinates.BorderThickness = new Thickness(5);
 
             PointLatLng point = MapControl.FromLocalToLatLng((int)upPosition.X, (int)upPosition.Y);
 
