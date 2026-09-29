@@ -22,7 +22,11 @@
                     </Grid.ColumnDefinitions>
 
                     <!--Add Checkpoint Button-->
-                    <Border Grid.Column="1" CornerRadius="20" BorderThickness="1" BorderBrush="#FEFBFB" Background="#141414" Width="75" Margin="5" Style="{StaticResource LowerBorderOpacity}">
+                    <Border Grid.Column="1" 
+                            CornerRadius="20" 
+                            BorderThickness="1" BorderBrush="#FEFBFB" Background="#141414" 
+                            Width="75" Margin="5" 
+                            Style="{StaticResource LowerBorderOpacity}">
                         <Button Name="BtnAddCheckpoint"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
@@ -39,7 +43,11 @@
 
 
                     <!--Remove Checkpoint Button-->
-                    <Border Grid.Column="0" CornerRadius="20" BorderThickness="1" BorderBrush="#FEFBFB" Background="#141414" Width="75" Margin="5" Style="{StaticResource LowerBorderOpacity}">
+                    <Border Grid.Column="0" 
+                            CornerRadius="20" 
+                            BorderThickness="1" BorderBrush="#FEFBFB" Background="#141414" 
+                            Width="75" Margin="5" 
+                            Style="{StaticResource LowerBorderOpacity}">
                         <Button Name="BtnRemoveCheckpoint"
                                 HorizontalAlignment="Center"
                                 Padding="0,-14,0,14"
@@ -55,7 +63,11 @@
                 </Grid>
 
                 <!--Calculate Route button-->
-                <Border Grid.Row="1" CornerRadius="20" Background="#C9283B" Width ="150" Margin="5" Style="{StaticResource LowerBorderOpacity}">
+                <Border Grid.Row="1" 
+                        CornerRadius="20" 
+                        Background="#C9283B" 
+                        Width ="150" Margin="5" 
+                        Style="{StaticResource LowerBorderOpacity}">
                     <Button Name="BtnCalculateRoute"
                             Content="Calculate Route" 
                             Height="50" Width="150" 
@@ -68,7 +80,11 @@
                 </Border>
 
                 <!--Generate Pacenotes button-->
-                <Border Grid.Row="2" CornerRadius="20" Background="#E2001A" Width ="150" Margin="5" Style="{StaticResource LowerBorderOpacity}">
+                <Border Grid.Row="2" 
+                        CornerRadius="20" 
+                        Background="#E2001A" 
+                        Width ="150" Margin="5" 
+                        Style="{StaticResource LowerBorderOpacity}">
                     <Button Name="BtnGeneratePacenotes"
                             Content="Generate Pacenotes" 
                             Height="50" Width="150" 

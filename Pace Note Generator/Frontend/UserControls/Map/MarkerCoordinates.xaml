@@ -13,9 +13,6 @@
                        Background="#141414" Foreground="White"
                        TextAlignment="Center"
                        FontSize="23"/>
-
-            <!--TextAlignment="Center"-->
-            <!--Text="52.087518, -0.018002"-->
         </Border>
     </Grid>
 </UserControl>
