@@ -24,6 +24,8 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
         public MapView()
         {
             InitializeComponent();
+
+            //Setting up the map
             MapControl.MapProvider = GMapProviders.OpenStreetMap;
             GMaps.Instance.Mode = AccessMode.ServerOnly;
             GMapProviders.OpenStreetMap.RefererUrl = "https://github.com/dominiczn/PaceNoteGenerator";
@@ -44,6 +46,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             MapButtonsPanel.GeneratePacenotes += GeneratePacenotes;
         }
 
+        //uses the PathAnalyser class to create pacenotes for the provided route. Whether the a straight is displayed is decided by its length being greater than 100m. This is then printed to the debug output
         private void GeneratePacenotes(object? sender, EventArgs e)
         {
             if (nodes.Count == 0) { return; }
@@ -59,6 +62,10 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             }
         }
 
+        //Checks if the user is placing a marker or if there is enough waypoints to calculate a route and if there is, the OsrmApiClient class is used to make a list of nodes
+        //If the API call fails the error message is printed to the debug output and the method is returned
+        //Any existing route is then cleared and nodes is set to the nodes returned from the OSRM Api
+        //
         private async void CalculateRoute(object? sender, EventArgs e)
         {
             if (isPlacingMarker) { return; }

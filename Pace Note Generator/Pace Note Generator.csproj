@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Backend\Databases\" />
     <Folder Include="Backend\Services\" />
   </ItemGroup>
 
