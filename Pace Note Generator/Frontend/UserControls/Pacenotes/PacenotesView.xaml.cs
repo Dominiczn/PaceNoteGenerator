@@ -4,6 +4,8 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
 {
     public partial class PacenotesView : UserControl
     {
+        //List<Pacenote>
+
         public PacenotesView()
         {
             InitializeComponent();

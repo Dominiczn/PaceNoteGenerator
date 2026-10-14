@@ -47,10 +47,10 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
         private void GeneratePacenotes(object? sender, EventArgs e)
         {
             if (nodes.Count == 0) { return; }
-            PathAnalyser testPath = new PathAnalyser(nodes);
+            PathAnalyser path = new PathAnalyser(nodes);
             {
 
-                List<Pacenote> pacenotes = testPath.AnalysePath();
+                List<Pacenote> pacenotes = path.AnalysePath();
                 for (int i = 0; i < pacenotes.Count; i++)
                 {
                     if (pacenotes[i].IsStraight == true && pacenotes[i].StraightLength < 100) { continue; }
@@ -63,9 +63,21 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
         {
             if (isPlacingMarker) { return; }
             if (waypoints.Count < 2) { return; }
-            ClearRoute();
             var routingAPI = new OsrmApiClient();
-            nodes = await routingAPI.FetchRoute(waypoints);
+            List<Node> newNodes;
+            try
+            {
+                newNodes = await routingAPI.FetchRoute(waypoints);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Calculating route failed due to {ex}");
+                return;
+            }
+
+            ClearRoute();
+
+            nodes = newNodes;
 
             List<PointLatLng> nodeCoordinates = new List<PointLatLng>();
             for(int i = 0; i < nodes.Count; i++)
@@ -109,12 +121,10 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
         {
             if (isPlacingMarker) { return; }
             if (waypoints.Count == 0) { return; }
-            
-            for (int i = 0; i < waypoints.Count; i++)
-            {
-                //this is fine as all the markers for waypoints are at the start of MapControl.Markers
-                if (MapControl.Markers[i].Position.Lng == waypoints[^1].Longitude && MapControl.Markers[i].Position.Lat == waypoints[^1].Latitude) { MapControl.Markers.RemoveAt(i); }
-            }
+
+            ClearRoute();
+
+            MapControl.Markers.Remove(waypoints[^1].Marker);
 
             waypoints.RemoveAt(waypoints.Count - 1);
             StcPnlButtonsHolder.Children.RemoveAt(StcPnlButtonsHolder.Children.Count - 1);
@@ -125,9 +135,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
                 ((Ellipse)waypoints[^1].Marker!.Shape).Fill = Brushes.Red;
                 ((MarkerCoordinates)StcPnlButtonsHolder.Children[^1]).BorderBrush = Brushes.Red;
             }
-            
 
-            ClearRoute();
         }
 
         private void AddMarker_Checkpoint(object? sender, EventArgs e)
@@ -150,6 +158,8 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
             double distance = (upPosition - mouseDownPosition).Length;
 
             if (distance > 5) { return; }
+
+            ClearRoute();
 
             WaypointType type;
             var markerCoordinates = new MarkerCoordinates();

@@ -13,6 +13,8 @@
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
 
+        
+        
         <TextBlock Grid.Row="2"
                    x:Name="TxtPacenoteCounter"
                    />
