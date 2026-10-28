@@ -1,26 +1,19 @@
-﻿using System;
+﻿using Pace_Note_Generator.Backend.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Pace_Note_Generator.Backend
 {
-    public struct Pacenote
+    public class Pacenote
     {
         public Direction? Direction;
         public CornerSeverity? CornerSeverity;
-        public bool IsStraight;
+        public PacenoteType Type;
         public double? StraightLength;
         public bool IsLong;
         public bool Tightens;
         public bool Widens;
-        public string? Hazard;
-
-        public Pacenote()
-        {
-            IsStraight = false;
-            IsLong = false;
-            Tightens = false;
-            Widens = false;
-        }
+        public List<string> Hazards = new();
     }
 }
