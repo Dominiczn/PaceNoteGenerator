@@ -6,6 +6,7 @@ namespace Pace_Note_Generator.Backend
 {
     public enum CornerSeverity
     {
+        Straight,
         Hairpin,
         One,
         Two,
@@ -13,7 +14,6 @@ namespace Pace_Note_Generator.Backend
         Four,
         Five,
         Six,
-        Straight,
 
     }
 }

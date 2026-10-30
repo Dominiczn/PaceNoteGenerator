@@ -22,9 +22,9 @@ namespace Pace_Note_Generator.Backend.Analysis
             foreach (List<Node> nodes in allGroups)
             {
                 Pacenote pacenote = ClassifyCorner(nodes, allGroups);
-                if (pacenote.IsStraight)
+                if (pacenote.CornerSeverity == CornerSeverity.Straight)
                 {
-                    pacenote.StraightLength = CalculateStraightLength(nodes);
+                    pacenote.StraightLength = (int)CalculateStraightLength(nodes);
                 }
 
                 pacenotes.Add(pacenote);
@@ -78,7 +78,7 @@ namespace Pace_Note_Generator.Backend.Analysis
             if (corner.Count == 2 && corner[0].Direction != null) { corner = Add1ForwardsNodeToCorner(corner, allCorners); }
             else if (corner.Count == 1 && corner[0].Direction != null) { corner = Add1ForwardsAnd1BackwardsNodeToCorner(corner, allCorners); }
 
-            if (corner.Count < 3) { pacenote.CornerSeverity = CornerSeverity.Straight; pacenote.Direction = null; }
+            if (corner.Count < 3) { pacenote.CornerSeverity = CornerSeverity.Straight; pacenote.Direction = Direction.Straight; }
             else
             {
                 pacenote = CalculateCornerSeverity(corner);
@@ -88,7 +88,7 @@ namespace Pace_Note_Generator.Backend.Analysis
             return pacenote;
         }
 
-        private Direction? CalculateCornerDirection(List<Node> corner)
+        private Direction CalculateCornerDirection(List<Node> corner)
         {
             return corner[1].Direction;
         }
@@ -112,7 +112,7 @@ namespace Pace_Note_Generator.Backend.Analysis
                 pacenote.CornerSeverity = Geomath.ClassifyCornerSeverity(highestSpeed);
             }
             
-            if (pacenote.CornerSeverity == CornerSeverity.Straight) { pacenote.IsStraight = true; }
+            if (pacenote.CornerSeverity == CornerSeverity.Straight) { pacenote.CornerSeverity = CornerSeverity.Straight; }
             return pacenote;
         }
 

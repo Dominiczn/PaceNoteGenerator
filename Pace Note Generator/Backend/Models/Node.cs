@@ -8,7 +8,7 @@ namespace Pace_Note_Generator.Backend
     {
         public double Latitude { protected set; get; }
         public double Longitude { protected set; get; }
-        public Direction? Direction;
+        public Direction Direction;
 
         public Node(double lat, double lon)
         {
