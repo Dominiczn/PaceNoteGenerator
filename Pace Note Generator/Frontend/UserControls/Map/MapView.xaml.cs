@@ -56,7 +56,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Map
                 List<Pacenote> pacenotes = path.AnalysePath();
                 for (int i = 0; i < pacenotes.Count; i++)
                 {
-                    if (pacenotes[i].Type == PacenoteType.Straight && pacenotes[i].StraightLength < 100) { continue; }
+                    if (pacenotes[i].CornerSeverity == CornerSeverity.Straight && pacenotes[i].StraightLength < 100) { continue; }
                     Debug.WriteLine($"{pacenotes[i].CornerSeverity} {pacenotes[i].Direction}");
                 }
             }

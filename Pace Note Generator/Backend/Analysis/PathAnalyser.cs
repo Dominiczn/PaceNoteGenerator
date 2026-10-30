@@ -48,7 +48,7 @@ namespace Pace_Note_Generator.Backend.Analysis
             if (NodeList.Count < 3) { return; }
 
             List<Node> group = new List<Node>();
-            Direction? nodesGroupDirection = Geomath.CalculateNodesDirection(NodeList[0], NodeList[1], NodeList[2]);
+            Direction nodesGroupDirection = Geomath.CalculateNodesDirection(NodeList[0], NodeList[1], NodeList[2]);
             NodeList[1].Direction = nodesGroupDirection;
             group.Add(NodeList[1]);
 
@@ -56,7 +56,7 @@ namespace Pace_Note_Generator.Backend.Analysis
             {
                 if (i < NodeList.Count - 2)
                 {
-                    Direction? nodesDirection = Geomath.CalculateNodesDirection(NodeList[i - 1], NodeList[i], NodeList[i + 1]);
+                    Direction nodesDirection = Geomath.CalculateNodesDirection(NodeList[i - 1], NodeList[i], NodeList[i + 1]);
                     if ( nodesDirection != nodesGroupDirection ) { break; }
 
                     NodeList[i].Direction = nodesDirection;
@@ -75,8 +75,8 @@ namespace Pace_Note_Generator.Backend.Analysis
         {
             Pacenote pacenote = new Pacenote();
 
-            if (corner.Count == 2 && corner[0].Direction != null) { corner = Add1ForwardsNodeToCorner(corner, allCorners); }
-            else if (corner.Count == 1 && corner[0].Direction != null) { corner = Add1ForwardsAnd1BackwardsNodeToCorner(corner, allCorners); }
+            if (corner.Count == 2 && corner[0].Direction != Direction.Straight) { corner = Add1ForwardsNodeToCorner(corner, allCorners); }
+            else if (corner.Count == 1 && corner[0].Direction != Direction.Straight) { corner = Add1ForwardsAnd1BackwardsNodeToCorner(corner, allCorners); }
 
             if (corner.Count < 3) { pacenote.CornerSeverity = CornerSeverity.Straight; pacenote.Direction = Direction.Straight; }
             else
@@ -98,7 +98,7 @@ namespace Pace_Note_Generator.Backend.Analysis
         {
             Pacenote pacenote = new Pacenote();
             
-            if (corner[1].Direction == null) { pacenote.CornerSeverity = CornerSeverity.Straight; }
+            if (corner[1].Direction == Direction.Straight) { pacenote.CornerSeverity = CornerSeverity.Straight; }
             else
             {
                 double highestSpeed = 0;
@@ -111,8 +111,7 @@ namespace Pace_Note_Generator.Backend.Analysis
 
                 pacenote.CornerSeverity = Geomath.ClassifyCornerSeverity(highestSpeed);
             }
-            
-            if (pacenote.CornerSeverity == CornerSeverity.Straight) { pacenote.CornerSeverity = CornerSeverity.Straight; }
+
             return pacenote;
         }
 
