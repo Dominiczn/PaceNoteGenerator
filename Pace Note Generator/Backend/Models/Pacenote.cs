@@ -4,23 +4,14 @@ using System.Text;
 
 namespace Pace_Note_Generator.Backend
 {
-    public struct Pacenote
+    public class Pacenote
     {
-        public Direction? Direction;
-        public CornerSeverity? CornerSeverity;
-        public bool IsStraight;
-        public double? StraightLength;
+        public Direction Direction;
+        public CornerSeverity CornerSeverity;
+        public int StraightLength;
         public bool IsLong;
         public bool Tightens;
         public bool Widens;
-        public string? Hazard;
-
-        public Pacenote()
-        {
-            IsStraight = false;
-            IsLong = false;
-            Tightens = false;
-            Widens = false;
-        }
+        public List<string> Hazards = new();
     }
 }

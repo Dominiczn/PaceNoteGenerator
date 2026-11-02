@@ -6,6 +6,7 @@ namespace Pace_Note_Generator.Backend
 {
     public enum Direction
     {
+        Straight,
         Left,
         Right,
     }
