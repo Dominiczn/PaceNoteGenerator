@@ -12,6 +12,21 @@
   <ItemGroup>
     <None Remove="Frontend\Taskbar Icon.png" />
     <None Remove="Frontend\Transparent Background.png" />
+    <None Remove="Frontend\UserControls\Images\1L.png" />
+    <None Remove="Frontend\UserControls\Images\1R.png" />
+    <None Remove="Frontend\UserControls\Images\2L.png" />
+    <None Remove="Frontend\UserControls\Images\2R.png" />
+    <None Remove="Frontend\UserControls\Images\3L.png" />
+    <None Remove="Frontend\UserControls\Images\3R.png" />
+    <None Remove="Frontend\UserControls\Images\4L.png" />
+    <None Remove="Frontend\UserControls\Images\4R.png" />
+    <None Remove="Frontend\UserControls\Images\5L.png" />
+    <None Remove="Frontend\UserControls\Images\5R.png" />
+    <None Remove="Frontend\UserControls\Images\6L.png" />
+    <None Remove="Frontend\UserControls\Images\6R.png" />
+    <None Remove="Frontend\UserControls\Images\HP L.png" />
+    <None Remove="Frontend\UserControls\Images\HP R.png" />
+    <None Remove="Frontend\UserControls\Images\TEST.png" />
     <None Remove="Frontend\UserControls\MainMenu\Transparent Background.png" />
     <None Remove="Transparent Background.png" />
   </ItemGroup>
@@ -25,7 +40,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Frontend\UserControls\Images\1L.png" />
+    <Resource Include="Frontend\UserControls\Images\1R.png" />
+    <Resource Include="Frontend\UserControls\Images\2L.png" />
+    <Resource Include="Frontend\UserControls\Images\2R.png" />
+    <Resource Include="Frontend\UserControls\Images\3L.png" />
+    <Resource Include="Frontend\UserControls\Images\3R.png" />
+    <Resource Include="Frontend\UserControls\Images\4L.png" />
+    <Resource Include="Frontend\UserControls\Images\4R.png" />
+    <Resource Include="Frontend\UserControls\Images\5L.png" />
+    <Resource Include="Frontend\UserControls\Images\5R.png" />
+    <Resource Include="Frontend\UserControls\Images\6L.png" />
+    <Resource Include="Frontend\UserControls\Images\6R.png" />
+    <Resource Include="Frontend\UserControls\Images\HP L.png" />
+    <Resource Include="Frontend\UserControls\Images\HP R.png" />
     <Resource Include="Frontend\UserControls\Images\Taskbar Icon.png" />
+    <Resource Include="Frontend\UserControls\Images\TEST.png" />
     <Resource Include="Frontend\UserControls\MainMenu\Transparent Background.png" />
   </ItemGroup>
 
