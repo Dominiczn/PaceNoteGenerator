@@ -12,21 +12,21 @@
   <ItemGroup>
     <None Remove="Frontend\Taskbar Icon.png" />
     <None Remove="Frontend\Transparent Background.png" />
-    <None Remove="Frontend\UserControls\Images\1L.png" />
-    <None Remove="Frontend\UserControls\Images\1R.png" />
-    <None Remove="Frontend\UserControls\Images\2L.png" />
-    <None Remove="Frontend\UserControls\Images\2R.png" />
-    <None Remove="Frontend\UserControls\Images\3L.png" />
-    <None Remove="Frontend\UserControls\Images\3R.png" />
-    <None Remove="Frontend\UserControls\Images\4L.png" />
-    <None Remove="Frontend\UserControls\Images\4R.png" />
-    <None Remove="Frontend\UserControls\Images\5L.png" />
-    <None Remove="Frontend\UserControls\Images\5R.png" />
-    <None Remove="Frontend\UserControls\Images\6L.png" />
-    <None Remove="Frontend\UserControls\Images\6R.png" />
-    <None Remove="Frontend\UserControls\Images\HP L.png" />
-    <None Remove="Frontend\UserControls\Images\HP R.png" />
-    <None Remove="Frontend\UserControls\Images\TEST.png" />
+    <None Remove="Frontend\UserControls\Images\FiveLeft.png" />
+    <None Remove="Frontend\UserControls\Images\FiveRight.png" />
+    <None Remove="Frontend\UserControls\Images\FourLeft.png" />
+    <None Remove="Frontend\UserControls\Images\FourRight.png" />
+    <None Remove="Frontend\UserControls\Images\HairpinLeft.png" />
+    <None Remove="Frontend\UserControls\Images\HairpinRight.png" />
+    <None Remove="Frontend\UserControls\Images\OneLeft.png" />
+    <None Remove="Frontend\UserControls\Images\OneRight.png" />
+    <None Remove="Frontend\UserControls\Images\SixLeft.png" />
+    <None Remove="Frontend\UserControls\Images\SixRight.png" />
+    <None Remove="Frontend\UserControls\Images\Straight.png" />
+    <None Remove="Frontend\UserControls\Images\ThreeLeft.png" />
+    <None Remove="Frontend\UserControls\Images\ThreeRight.png" />
+    <None Remove="Frontend\UserControls\Images\TwoLeft.png" />
+    <None Remove="Frontend\UserControls\Images\TwoRight.png" />
     <None Remove="Frontend\UserControls\MainMenu\Transparent Background.png" />
     <None Remove="Transparent Background.png" />
   </ItemGroup>
@@ -40,22 +40,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Frontend\UserControls\Images\1L.png" />
-    <Resource Include="Frontend\UserControls\Images\1R.png" />
-    <Resource Include="Frontend\UserControls\Images\2L.png" />
-    <Resource Include="Frontend\UserControls\Images\2R.png" />
-    <Resource Include="Frontend\UserControls\Images\3L.png" />
-    <Resource Include="Frontend\UserControls\Images\3R.png" />
-    <Resource Include="Frontend\UserControls\Images\4L.png" />
-    <Resource Include="Frontend\UserControls\Images\4R.png" />
-    <Resource Include="Frontend\UserControls\Images\5L.png" />
-    <Resource Include="Frontend\UserControls\Images\5R.png" />
-    <Resource Include="Frontend\UserControls\Images\6L.png" />
-    <Resource Include="Frontend\UserControls\Images\6R.png" />
-    <Resource Include="Frontend\UserControls\Images\HP L.png" />
-    <Resource Include="Frontend\UserControls\Images\HP R.png" />
+    <Resource Include="Frontend\UserControls\Images\FiveLeft.png" />
+    <Resource Include="Frontend\UserControls\Images\FiveRight.png" />
+    <Resource Include="Frontend\UserControls\Images\FourLeft.png" />
+    <Resource Include="Frontend\UserControls\Images\FourRight.png" />
+    <Resource Include="Frontend\UserControls\Images\HairpinLeft.png" />
+    <Resource Include="Frontend\UserControls\Images\HairpinRight.png" />
+    <Resource Include="Frontend\UserControls\Images\OneLeft.png" />
+    <Resource Include="Frontend\UserControls\Images\OneRight.png" />
+    <Resource Include="Frontend\UserControls\Images\SixLeft.png" />
+    <Resource Include="Frontend\UserControls\Images\SixRight.png" />
+    <Resource Include="Frontend\UserControls\Images\Straight.png" />
     <Resource Include="Frontend\UserControls\Images\Taskbar Icon.png" />
-    <Resource Include="Frontend\UserControls\Images\TEST.png" />
+    <Resource Include="Frontend\UserControls\Images\ThreeLeft.png" />
+    <Resource Include="Frontend\UserControls\Images\ThreeRight.png" />
+    <Resource Include="Frontend\UserControls\Images\TwoLeft.png" />
+    <Resource Include="Frontend\UserControls\Images\TwoRight.png" />
     <Resource Include="Frontend\UserControls\MainMenu\Transparent Background.png" />
   </ItemGroup>
 
