@@ -8,6 +8,8 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
     {
         private List<Pacenote> pacenotes = new List<Pacenote>();
 
+        private int currentIndex = 0;
+
         private readonly Dictionary<Key, string> hazardKeys = new Dictionary<Key, string>()
         {
             {Key.D1, "Blind" },
@@ -27,6 +29,13 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
         {
             InitializeComponent();
             this.pacenotes = pacenotes;
+
+            Focusable = true;
+        }
+
+        private void DisplayCard()
+        {
+
         }
 
         private void UserControl_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
