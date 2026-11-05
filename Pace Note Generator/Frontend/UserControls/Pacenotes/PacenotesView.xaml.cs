@@ -1,4 +1,5 @@
 ﻿using Pace_Note_Generator.Backend;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -31,23 +32,58 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
             this.pacenotes = pacenotes;
 
             Focusable = true;
+            Loaded += (sender, e) => Focus();
+
+            PbProgressBar.Maximum = pacenotes.Count;
+            UpdateDisplay();
         }
 
-        private void DisplayCard()
+        private void DisplayCard(PacenoteCard card, int index)
         {
+            if (index < 0 || index >= pacenotes.Count)
+            {
+                card.Visibility = Visibility.Hidden;
+                return;
+            }
 
+            card.Visibility = Visibility.Visible;
+            card.DisplayPacenote(pacenotes[index]);
+        }
+
+        private void UpdateDisplay()
+        {
+            DisplayCard(PrevPacenote, currentIndex - 3);
+            DisplayCard(FarLeftPacenote, currentIndex - 2);
+            DisplayCard(MiddleLeftPacenote, currentIndex - 1);
+            DisplayCard(MiddlePacenote, currentIndex);
+            DisplayCard(MiddleRightPacenote, currentIndex + 1);
+            DisplayCard(FarRightPacenote, currentIndex + 2);
+            DisplayCard(NextPacenote, currentIndex + 3);
+
+            TxtProgressText.Text = $"{currentIndex + 1}/{pacenotes.Count}";
+            PbProgressBar.Value = currentIndex + 1;
         }
 
         private void UserControl_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Right)
             {
-
+                if (currentIndex < pacenotes.Count - 1)
+                {
+                    currentIndex++;
+                    UpdateDisplay();
+                }
+                e.Handled = true;
             }
 
             else if (e.Key == Key.Left)
             {
-
+                if (currentIndex > 0)
+                {
+                    currentIndex--;
+                    UpdateDisplay();
+                }
+                e.Handled = true;
             }
         }
     }
