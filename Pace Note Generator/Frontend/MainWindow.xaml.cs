@@ -1,6 +1,7 @@
 ﻿using Pace_Note_Generator.Frontend.UserControls.MainMenu;
 using Pace_Note_Generator.Frontend.UserControls.Map;
 using System.Windows;
+using Pace_Note_Generator.Frontend.UserControls.Pacenotes;
 
 namespace Pace_Note_Generator
 {
@@ -25,6 +26,7 @@ namespace Pace_Note_Generator
         private void MainMenu_OpenStageRequested(object? sender, EventArgs e)
         {
             //will eventually load existing stages into MapView or as a list
+            MainContent.Content = new PacenotesView();
         }
     }
 } 

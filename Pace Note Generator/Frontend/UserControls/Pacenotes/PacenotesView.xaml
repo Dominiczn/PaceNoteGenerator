@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Pace_Note_Generator.Frontend.UserControls.Pacenotes"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             Background="#2b2b2e"
+             PreviewKeyDown="UserControl_PreviewKeyDown"
+             d:DesignHeight="1440" d:DesignWidth="2560">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"/>
@@ -13,10 +15,98 @@
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
 
-        
-        
-        <TextBlock Grid.Row="2"
-                   x:Name="TxtPacenoteCounter"
-                   />
+        <!--These are where the pacenotes are displayed-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+
+            <!--Top left pacenote (Previous)-->
+            <local:PacenoteCard Grid.Column="0" Grid.Row="0" x:Name="PrevPacenote" Margin="15"/>
+
+            <Viewbox Grid.Column="0" Grid.Row="1">
+                <TextBlock
+                           Text="Prev"
+                           Foreground="#9da0a4"
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Viewbox>
+
+            <!--Top right pacenote (Next)-->
+            <local:PacenoteCard Grid.Column="2" Grid.Row="0" x:Name="NextPacenote" Margin="15"/>
+
+            <Viewbox Grid.Column="2" Grid.Row="1">
+                <TextBlock
+                           Text="Next"
+                           Foreground="#9da0a4"
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Viewbox>
+        </Grid>
+
+        <!--This is where all the other pacenotes are, grid column 2 is the middle-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="28*"/>
+                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="18*"/>
+            </Grid.ColumnDefinitions>
+
+            <local:PacenoteCard Grid.Column="0" x:Name="FarLeftPacenote" Margin="15"/>
+            <local:PacenoteCard Grid.Column="1" x:Name="MiddleLeftPacenote" Margin="15"/>
+            <local:PacenoteCard Grid.Column="2" x:Name="MiddlePacenote" Margin="15"/>
+            <local:PacenoteCard Grid.Column="3" x:Name="MiddleRightPacenote" Margin="15"/>
+            <local:PacenoteCard Grid.Column="4" x:Name="FarRightPacenote" Margin="15"/>
+        </Grid>
+
+        <!--This is a progress bar and Timer-->
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="80*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Timer-->
+            <Viewbox Margin="40">
+                <TextBlock x:Name="TxtTimer" Grid.Row="0"
+                           Foreground="#9da0a4"
+                           FontFamily="Segoe UI"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Viewbox>
+
+            <!--Progress Bar-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="0">
+                    <TextBlock x:Name="TxtProgressText"
+                               FontFamily="Segoe UI" FontSize="45"
+                               Foreground="#9da0a4"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Viewbox>
+
+                <ProgressBar x:Name="PbProgressBar" Grid.Row="1" Margin="15" 
+                             Foreground="#9da0a4" Background="Transparent"
+                             BorderBrush="#9da0a4" BorderThickness="4"
+                             Minimum="0"/>
+
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
