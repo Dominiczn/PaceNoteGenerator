@@ -27,7 +27,6 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
         {
             InitializeComponent();
             this.pacenotes = pacenotes;
-
         }
 
         private void UserControl_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
