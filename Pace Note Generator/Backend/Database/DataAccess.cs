@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS ""Hazard"" (
 	PRIMARY KEY(""HazardId"")
 );
 
-INSERT OR IGNORE INTO ""Hazard"" VALUES (NULL, 'Blind'), (NULL, 'Crest'), (NULL, 'Jump'), (NULL, 'Narrows'), (NULL, 'Junction'), (NULL, 'Off Camber'), (NULL, 'Gravel'), (NULL, 'Tarmac'), (NULL, 'Gate'), (NULL, 'Cut'), (NULL, 'Dont Cut'), (NULL, 'Unconfirmed');
+INSERT OR IGNORE INTO ""Hazard"" VALUES (NULL, 'Blind'), (NULL, 'Crest'), (NULL, 'Jump'), (NULL, 'Narrows'), (NULL, 'Junction'), (NULL, 'Off Camber'), (NULL, 'Gravel'), (NULL, 'Tarmac'), (NULL, 'Cut'), (NULL, 'Dont Cut'), (NULL, 'Unconfirmed');
 
 CREATE TABLE IF NOT EXISTS ""Pacenote"" (
 	""PacenoteId""	INTEGER,
