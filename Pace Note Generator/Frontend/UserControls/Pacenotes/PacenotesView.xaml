@@ -8,6 +8,8 @@
              Background="#2b2b2e"
              PreviewKeyDown="UserControl_PreviewKeyDown"
              d:DesignHeight="1440" d:DesignWidth="2560">
+    
+    <!--These are all things regarding hazards-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"/>
@@ -15,6 +17,7 @@
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
 
+        <!--Shows the user the keybinds for the hazards-->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80*"/>
@@ -22,8 +25,18 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0"
-                       Text=""/>
+                       Foreground="#9da0a4"
+                       HorizontalAlignment="Center"
+                       TextAlignment="Center"
+                       FontFamily="Segoe UI">
+                
+                <Run Text="Hazard Keybinds:" FontSize="80"/>
+                <LineBreak/>
+                <Run FontSize="30" Text="1 Blind   2 Crest   3 Jump   4 Narrows   5 Junction   6 Off Camber   7 Gravel   8 Tarmac   9 Cut   0 Dont Cut   Backspace Unconfirmed"/>
+            </TextBlock>
 
+            
+            
         </Grid>
 
         <!--This is where all the pacenotes are displayed, grid column 2 is the middle-->
