@@ -2,14 +2,17 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Diagnostics;
+using System.Windows.Threading;
 
 namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
 {
     public partial class PacenotesView : UserControl
     {
         private List<Pacenote> pacenotes = new List<Pacenote>();
-
         private int currentIndex = 0;
+        private readonly DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private readonly Stopwatch stopwatch = new Stopwatch();
 
         private readonly Dictionary<Key, string> hazardKeys = new Dictionary<Key, string>()
         {
@@ -34,8 +37,17 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
             Focusable = true;
             Loaded += (sender, e) => Focus();
 
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
+            TxtTimer.Text = "00:00";
+
             PbProgressBar.Maximum = pacenotes.Count;
             UpdateDisplay();
+        }
+
+        private void DispatcherTimer_Tick(object? sender, EventArgs e)
+        {
+            TxtTimer.Text = stopwatch.Elapsed.ToString(@"mm\:ss");
         }
 
         private void DisplayCard(PacenoteCard card, int index)
@@ -52,13 +64,11 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
 
         private void UpdateDisplay()
         {
-            DisplayCard(PrevPacenote, currentIndex - 3);
             DisplayCard(FarLeftPacenote, currentIndex - 2);
             DisplayCard(MiddleLeftPacenote, currentIndex - 1);
             DisplayCard(MiddlePacenote, currentIndex);
             DisplayCard(MiddleRightPacenote, currentIndex + 1);
             DisplayCard(FarRightPacenote, currentIndex + 2);
-            DisplayCard(NextPacenote, currentIndex + 3);
 
             TxtProgressText.Text = $"{currentIndex + 1}/{pacenotes.Count}";
             PbProgressBar.Value = currentIndex + 1;
@@ -83,6 +93,22 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
                     currentIndex--;
                     UpdateDisplay();
                 }
+                e.Handled = true;
+            }
+
+            else if (e.Key == Key.Space)
+            {
+                if (stopwatch.IsRunning)
+                {
+                    stopwatch.Stop();
+                    dispatcherTimer.Stop();
+                }
+                else
+                {
+                    stopwatch.Start();
+                    dispatcherTimer.Start();
+                }
+
                 e.Handled = true;
             }
         }

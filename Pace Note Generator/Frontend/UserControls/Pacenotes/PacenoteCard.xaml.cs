@@ -20,6 +20,9 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
                 ImgCorner.Visibility = Visibility.Hidden;
                 TxtStraight.Visibility = Visibility.Visible;
                 ImgStraightBorder.Visibility = Visibility.Visible;
+
+                TxtStraight.FontSize = pacenote.StraightLength >= 100 ? 400 : 500;
+
                 TxtStraight.Text = $"{pacenote.StraightLength}";
             }
             else
