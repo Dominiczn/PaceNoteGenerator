@@ -27,6 +27,7 @@
             <TextBlock Grid.Column="0"
                        Foreground="#9da0a4"
                        HorizontalAlignment="Center"
+                       Margin="0,30,0,0"
                        TextAlignment="Center"
                        FontFamily="Segoe UI">
                 
@@ -35,8 +36,17 @@
                 <Run FontSize="30" Text="1 Blind   2 Crest   3 Jump   4 Narrows   5 Junction   6 Off Camber   7 Gravel   8 Tarmac   9 Cut   0 Dont Cut   Backspace Unconfirmed"/>
             </TextBlock>
 
-            
-            
+            <Border x:Name="hazardCard"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Background="#3a3a3e" CornerRadius="12"
+                    Padding="40,20"
+                    Visibility="Collapsed">
+                <TextBlock x:Name="hazardCardText"
+                           Foreground="#9da0a4"
+                           FontFamily="Segoe UI" FontSize="60"/>
+            </Border>
+
         </Grid>
 
         <!--This is where all the pacenotes are displayed, grid column 2 is the middle-->

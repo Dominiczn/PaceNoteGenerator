@@ -1,8 +1,8 @@
 ﻿using Pace_Note_Generator.Backend;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Diagnostics;
 using System.Windows.Threading;
 
 namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
@@ -13,6 +13,7 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
         private int currentIndex = 0;
         private readonly DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private readonly Stopwatch stopwatch = new Stopwatch();
+        private readonly DispatcherTimer hazardTimer = new DispatcherTimer();
 
         private readonly Dictionary<Key, string> hazardKeys = new Dictionary<Key, string>()
         {
@@ -41,8 +42,26 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
             TxtTimer.Text = "00:00";
 
+            hazardTimer.Tick += HazardTimer_Tick;
+            hazardTimer.Interval = TimeSpan.FromSeconds(1.5);
+
             PbProgressBar.Maximum = pacenotes.Count;
             UpdateDisplay();
+        }
+
+        private void ShowHazardCard(string hazard)
+        {
+            hazardCardText.Text = hazard;
+            hazardCard.Visibility = Visibility.Visible;
+
+            hazardTimer.Stop();
+            hazardTimer.Start();
+        }
+
+        private void HazardTimer_Tick(object? sender, EventArgs e)
+        {
+            hazardCard.Visibility = Visibility.Collapsed;
+            hazardTimer.Stop();
         }
 
         private void DispatcherTimer_Tick(object? sender, EventArgs e)
@@ -108,6 +127,15 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
                     stopwatch.Start();
                     dispatcherTimer.Start();
                 }
+
+                e.Handled = true;
+            }
+
+            else if (hazardKeys.ContainsKey(e.Key))
+            {
+                ShowHazardCard(hazardKeys[e.Key]);
+
+
 
                 e.Handled = true;
             }
