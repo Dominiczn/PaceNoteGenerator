@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Pace_Note_Generator.Frontend.UserControls.Pacenotes"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="700">
+             d:DesignHeight="1000" d:DesignWidth="700">
     <Viewbox>
+        
         <Grid Width="700" Height="700">
             <Image Source="/Frontend/UserControls/Images/Straight.png" x:Name="ImgStraightBorder"/>
             <TextBlock x:Name="TxtStraight"
