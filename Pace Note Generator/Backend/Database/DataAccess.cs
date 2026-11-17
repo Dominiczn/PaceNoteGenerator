@@ -2,6 +2,7 @@
 using Pace_Note_Generator.Backend.Models;
 using System.Data;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Pace_Note_Generator.Backend.Database
 {
@@ -163,6 +164,23 @@ CREATE TABLE IF NOT EXISTS ""Stage"" (
 			return hazards;
 		}
 
+		public static void AddHazard(string hazardName, int pacenoteId)
+		{
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+                var insertCommand = new SqliteCommand();
+                insertCommand.Connection = db;
+
+                insertCommand.CommandText = "INSERT OR IGNORE INTO PacenoteHazard VALUES (@PacenoteId, (SELECT HazardId FROM Hazard WHERE Name = @Name));";
+                insertCommand.Parameters.AddWithValue("@PacenoteId", pacenoteId);
+                insertCommand.Parameters.AddWithValue("@Name", hazardName);
+
+                insertCommand.ExecuteReader();
+
+            }
+        }
+
 		public static List<Pacenote> GetPacenotes(int stageId)
 		{
 			List<Pacenote> pacenotes = new List<Pacenote>();
@@ -182,13 +200,14 @@ CREATE TABLE IF NOT EXISTS ""Stage"" (
 				{
 					Pacenote pacenote = new Pacenote
 					{
+						PacenoteId = query.GetInt32(0),
 						Direction = (Direction)query.GetInt32(1),
 						CornerSeverity = (CornerSeverity)query.GetInt32(2),
 						StraightLength = query.GetInt32(3),
 						IsLong = query.GetBoolean(4),
-                        Tightens = query.GetBoolean(5),
+						Tightens = query.GetBoolean(5),
 						Widens = query.GetBoolean(6),
-                    };
+					};
 
                     var selectCommandHazard = new SqliteCommand("SELECT Hazard.Name " +
                     "FROM PacenoteHazard " +

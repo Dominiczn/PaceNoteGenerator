@@ -1,4 +1,5 @@
 ﻿using Pace_Note_Generator.Backend;
+using Pace_Note_Generator.Backend.Database;
 using Pace_Note_Generator.Frontend.UserControls.MainMenu;
 using Pace_Note_Generator.Frontend.UserControls.Map;
 using Pace_Note_Generator.Frontend.UserControls.Pacenotes;
@@ -43,7 +44,18 @@ namespace Pace_Note_Generator
         new Pacenote { Direction = Direction.Left, CornerSeverity = CornerSeverity.Four, IsLong = true, Tightens = true }
     };
 
-            MainContent.Content = new PacenotesView(testPacenotes);
+            if (DataAccess.GetStages().Count == 0)
+            {
+                DataAccess.AddStage("Test Stage", 1000);
+
+                for (int i = 0; i < testPacenotes.Count; i++)
+                {
+                    DataAccess.AddPacenote("Test Stage", i + 1, testPacenotes[i]);
+                }
+            }
+
+            int stageId = DataAccess.GetStages()[0].StageId;
+            MainContent.Content = new PacenotesView(DataAccess.GetPacenotes(stageId));
         }
     }
 } 

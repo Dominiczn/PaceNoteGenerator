@@ -1,4 +1,5 @@
 ﻿using Pace_Note_Generator.Backend;
+using Pace_Note_Generator.Backend.Database;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -133,9 +134,10 @@ namespace Pace_Note_Generator.Frontend.UserControls.Pacenotes
 
             else if (hazardKeys.ContainsKey(e.Key))
             {
+                string hazard = hazardKeys[e.Key];
                 ShowHazardCard(hazardKeys[e.Key]);
 
-
+                DataAccess.AddHazard(hazard, pacenotes[currentIndex].PacenoteId);
 
                 e.Handled = true;
             }
